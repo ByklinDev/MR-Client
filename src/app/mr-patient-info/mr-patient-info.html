@@ -1,0 +1,72 @@
+<div class="info-container">
+  <div class="info-title">
+    <p>Patient Information</p>
+  </div>
+  <div class="info-fields">
+    <div class="pairs-container">
+      <div class="pair">
+        <div class="def">Number</div>
+        <div class="info-val">{{patientNumber()}}</div>
+      </div>
+      <div class="pair">
+        <div class="def">Status</div>
+        <div class="info-val">{{patientStatus()}}</div>
+      </div>
+      <div class="pair">
+        <div class="def">Sex</div>
+        <div class="info-val">{{patientSex()}}</div>
+      </div>
+      <div class="pair">
+        <div class="def">Medicine Type</div>
+        <div class="info-val">{{patientMedicineType()}}</div>
+      </div>
+      <div class="pair">
+        <div class="def">Date Of Birth</div>
+        <div class="info-val">{{patientDateOfBirth()}}</div>
+      </div>
+      <div class="pair">
+        <div class="def">Last visit date</div>
+        <div class="info-val">{{patientLastVisitDate()}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="table-content">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="Number">
+        <th mat-header-cell *matHeaderCellDef>Number</th>
+        <td mat-cell *matCellDef="let element">{{element.visitnumber}}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let element">{{element.visitdate}}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="Medicine">
+        <th mat-header-cell *matHeaderCellDef>Medicine</th>
+        <td mat-cell *matCellDef="let element">{{element.medicine}}</td>
+      </ng-container>
+
+      
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of visits"
+    >
+    </mat-paginator>
+  </div>
+  <div class="actions-container">
+    <button id="performvisitbtn">Perform Visit</button>
+    <button id="endparty">End Participation</button>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+  margin-left: 16px;
+}
+.titlepatient{
+    text-align: center;
+     font-size: 24px;
+  font-weight: bold;
+  color: #2d1c66;
+  margin-top: 100px;
+  margin-bottom: 80px;
+}
+.patient-container{
+    
+    min-height: 75svh;
+    justify-content: space-between;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background-color: #faf9fd;
+}
+.form-container{
+    display: flex;
+    width: 40%;
+    flex-direction: column;
+}
+.patientfields{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    
+}
+.form-container >form{
+    width: 100%;
+}
+.btnfullwidth{
+    width: 150px;
+    height: 55px;
+    border: 0px;
+    border-radius: 0.25rem;
+    background-color: #024959;
+    color: white;
+    margin-top: 80px;
+    font-size: medium;
+    
+}
+.btnfullwidth:hover {
+  background-color: #023d4b;
+  cursor: pointer;
+}
+.btnfullwidth:active {
+  background-color: #022f3d;
+  cursor: pointer;
+   -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+     -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+          box-shadow: inset 0px 0px 5px #c1c1c1;
+   outline: none;
+}
+.allform{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+
+}
+.image-container{
+    width: 50%;
+}

@@ -1,0 +1,36 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+.appnavbar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+app-mr-navbar {
+  flex-grow: 1;
+}
+.app-container {
+  display: flex;
+  flex-direction: column;
+
+  /* fallback height */
+  min-height: 100vh;
+
+  /* new small viewport height for modern browsers */
+  min-height: 100svh;
+}
+.app-container > footer {
+  margin-top: auto;
+}
+.mainlogo{
+padding-top: 15px;
+  
+}
+.imglogo{
+  height: 80px;
+  background-color: #faf9fd;
+}
+mat-toolbar-row{
+  padding-top: 5px;
+  height: 80px;
+}

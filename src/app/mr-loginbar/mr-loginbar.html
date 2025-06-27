@@ -1,0 +1,32 @@
+<div class="loginbar">
+  <div class="userbtn">
+    <img
+      class="userphoto"
+      [src]="userPhotoSrc()"
+      alt="userphoto"
+      height="64px"
+    />
+  </div>
+  <div class="username-short">
+    <p>{{userBarName()}}</p>
+  </div>
+  <div class="usermenu">
+    <button
+      matIconButton
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button routerLink="myaccount" mat-menu-item>
+        <mat-icon>account_box</mat-icon>
+        <span>My Account</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        <span>Log Out</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>

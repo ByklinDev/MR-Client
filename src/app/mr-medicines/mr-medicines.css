@@ -1,0 +1,51 @@
+.medicines-container {
+  min-height: 70svh;
+
+  justify-content: space-between;
+  padding: 0 16px;
+  padding-top: 20px;
+  flex-wrap: wrap;
+  background-color: #faf9fd;
+}
+
+.medicines-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.btn-container {
+  justify-content: end;
+  margin-right: 0px;
+}
+
+.btn-add-medicine {
+  width: 160px;
+  height: 55px;
+  background-color: #209973;
+  color: white;
+  font-size: medium;
+}
+
+.btn-add-medicine {
+  border-radius: 0.25rem;
+  border: 0px;
+}
+.btn-add-medicine:hover {
+  background-color: #177155;
+  cursor: pointer;
+}
+.btn-add-medicine:active {
+  background-color: #209973;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+}
+.table-content{
+    width: 100%;
+}
+.table-content >table{
+    width: 100%;
+}

@@ -1,0 +1,80 @@
+<div class="signup-container">
+  <div class="signupright">
+    <img src="loginside.jpg" alt="signupside" height="610" />
+  </div>
+  <div class="signupform">
+    <form [formGroup]="signupForm" (ngSubmit)="signupUser()">
+      <h2 class="signuptitle">REGISTER NOW</h2>
+      <div class="signupfields">
+        <mat-form-field id="firstname">
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            formControlName="firstname"
+            type="text"
+            required
+            placeholder="Enter your First Name"
+          />
+        </mat-form-field>
+
+        <mat-form-field id="lastname">
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            formControlName="lastname"
+            type="text"
+            required
+            placeholder="Enter your Last Name"
+          />
+        </mat-form-field>
+
+        <mat-form-field id="initials">
+          <mat-label>Initials</mat-label>
+          <input
+            matInput
+            formControlName="initials"
+            type="text"
+            required
+            placeholder="Enter your Initials"
+          />
+        </mat-form-field>
+
+        <mat-form-field id="emailsignup">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            formControlName="emailsignup"
+            type="email"
+            required
+            placeholder="Enter your Email"
+          />
+        </mat-form-field>
+        <mat-form-field id="passwordsignup">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            formControlName="passwordsignup"
+            type="password"
+            required
+            placeholder="Enter a strong Password"
+          />
+        </mat-form-field>
+        <mat-form-field id="confirmpassword">
+          <mat-label>Confirm Password</mat-label>
+          <input
+            matInput
+            formControlName="confirmpassword"
+            type="password"
+            required
+            placeholder="Confirm yuor Password"
+          />
+        </mat-form-field>
+      </div>
+      <div>
+        <button class="btnfullwidth" color="primary" type="submit">
+          Sign Up
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

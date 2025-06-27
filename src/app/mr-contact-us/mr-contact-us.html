@@ -1,0 +1,86 @@
+<div class="contactus-container">
+  <div class="contactustext">
+    <h4 class="contacttitle">Contact Us</h4>
+    <p>775 Westminster Avenue APT D5 Brooklin, NY, 11230</p>
+    <p>medicalResearch&#64;lab.com</p>
+    <p>+1(416)661-5775</p>
+  </div>
+  <div class="contactusform">
+    <form [formGroup]="contactForm" (ngSubmit)="sendEmail()">
+      <div class="rowone">
+        <mat-form-field id="name">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="name"
+            placeholder="Name"
+          />
+        </mat-form-field>
+        <mat-form-field id="email">
+          <mat-label>E-Mail</mat-label>
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            placeholder="E-Mail"
+            (blur)="updateErrorMessage()"
+            required
+          />
+          @if (this.contactForm.controls.email.invalid) {
+          <mat-error>{{errorMessage()}}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="rowone">
+        <mat-form-field id="phone">
+          <mat-label>Phone Number</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="phone"
+            placeholder="Phone Number"
+          />
+        </mat-form-field>
+        <mat-form-field id="address">
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="address"
+            placeholder="Address"
+          />
+        </mat-form-field>
+      </div>
+      <div class="rowone">
+        <mat-form-field class="topic">
+          <mat-label>Topic</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="topic"
+            placeholder="Topic"
+          />
+        </mat-form-field>
+      </div>
+      <div class="rowone">
+        <mat-form-field class="messagetext">
+          <mat-label>Message</mat-label>
+          <textarea
+            matInput
+            formControlName="message"
+            placeholder="Add the message"
+            required
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <button
+        class="btnfullwidth"
+        type="submit"
+        [disabled]="!contactForm.valid"
+      >
+        Send
+      </button>
+    </form>
+  </div>
+</div>

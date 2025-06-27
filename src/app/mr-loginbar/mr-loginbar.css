@@ -1,0 +1,29 @@
+.loginbar {
+    display: flex;
+    margin-top: 5px;
+}
+
+.userphoto{
+    display: block;
+    margin: 0 auto;  
+    border-radius: 2rem;  
+}
+
+.userbtn {
+    padding: 0px;
+    height: 55px;
+    margin-top: 12px;
+    margin-right: 10px;
+}
+
+.username-short {
+    flex-grow: 1;
+    text-align: center;
+    padding-top: 10px;
+    font-size: medium;
+    color: #024959;
+}
+
+.usermenu{
+    padding-top: 1px;
+}

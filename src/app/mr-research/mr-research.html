@@ -1,0 +1,44 @@
+<div class="research-container">
+  <div class="research-header">
+    <div>
+      <app-mr-search></app-mr-search>
+    </div>
+    <div>
+      <button class="btnaddpatient">Add Patient</button>
+    </div>
+  </div>
+  <div>
+    <div class="table-content">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="PatientNumber">
+          <th mat-header-cell *matHeaderCellDef>PatientNumber</th>
+          <td mat-cell *matCellDef="let element">{{element.PatientNumber}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="DateOfBirth">
+          <th mat-header-cell *matHeaderCellDef>DateOfBirth</th>
+          <td mat-cell *matCellDef="let element">{{element.DateOfBirth}}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="LastVisitDate">
+          <th mat-header-cell *matHeaderCellDef>LastVisitDate</th>
+          <td mat-cell *matCellDef="let element">{{element.LastVisitDate }}</td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="Medicines">
+          <th mat-header-cell *matHeaderCellDef>Medicines</th>
+          <td mat-cell *matCellDef="let element">{{element.Medicines}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>

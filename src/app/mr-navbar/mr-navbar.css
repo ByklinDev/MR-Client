@@ -1,0 +1,35 @@
+.mr-navbar {
+  display: flex;
+  overflow: hidden;
+  
+  border-top: 5px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border-top: 4px solid #024959;
+}
+.menuitem {
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.mr-navbar button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  width: 100%;
+  transition: 0.3s;
+  color: #024959;
+  font-size: medium;
+}
+
+.mr-navbar button.active {
+  background-color: #024959;
+  color: white;
+}

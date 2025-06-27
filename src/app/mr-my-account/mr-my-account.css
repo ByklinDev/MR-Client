@@ -1,0 +1,137 @@
+.myaccount-container {
+  margin: 0 16px;
+  min-height: 76svh;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+}
+.myaccount-form-field {
+  min-width: 500px;
+  margin-left: 15px;
+}
+.myaccountheader {
+  display: flex;
+  background-color: beige;
+  flex-wrap: wrap-reverse;
+  align-items: flex-start;
+}
+.myaccount-menu {
+  margin-right: 25px;
+  margin-bottom: 40px;
+}
+.myaccount-header {
+  height: 200px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  background-image: linear-gradient(to top, #024959, rgb(58, 101, 136));
+}
+.myaccount-form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.row-one,
+.row-two,
+.row-three,
+.row-four,
+.row-five {
+  width: 75%;
+}
+.btnfullwidth {
+  height: 50px;
+  margin-left: 15px;
+  min-width: 500px;
+  background-color: #024959;
+  color: white;
+  border-radius: 0.25rem;
+  border: none;
+  margin-bottom: 20px;
+  font-size: medium;
+}
+
+.btnfullwidth:hover {
+  background-color: #023d4b;
+  cursor: pointer;
+}
+.btnfullwidth:active {
+  background-color: #022f3d;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+}
+.myaccount-title {
+  font-size: large;
+  color: #024959;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.userphoto {
+  display: block;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 100%
+}
+.overlay > button {
+  margin-top: 5px;
+  background: rgba(0, 0, 0, 0);
+  border: 0px;
+  cursor: pointer;
+}
+.userbtn {
+  position: relative;
+  overflow: hidden;
+
+  padding: 0px;
+  margin-left: 30px;
+  margin-bottom: 30px;
+  height: 140px;
+  width: 140px;
+  margin-top: 12px;
+  margin-right: 10px;
+  flex-flow: row;
+  align-items: flex-end;
+  color: white;
+  font-size: large;
+  border-radius: 50%;
+  background-color: white;
+}
+.username-short {
+  flex-grow: 1;
+  text-align: left;
+  padding-top: 10px;
+  color: white;
+  font-size: 18pt;
+  margin-left: 10px;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.4);
+  color: #f1f1f1;
+  width: 100%;
+  transition: 0.2s ease;
+  opacity: 0;
+  color: white;
+  font-size: 20px;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-radius: 0 0 5rem 5rem;
+  text-align: center;
+}
+
+.userbtn:hover .overlay {
+  opacity: 1;
+  height: 50%;
+
+}

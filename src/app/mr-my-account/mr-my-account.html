@@ -1,0 +1,128 @@
+<div class="myaccount-container">
+  <div class="myaccount-header">
+    <div class="userbtn">
+      <img class="userphoto" [src]="userPhotoSrc()" alt="userphoto" />
+      <div class="overlay">
+        <button matIconButton>
+          <mat-icon>photo_camera</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="username-short">
+      <p>{{userBarName()}}</p>
+    </div>
+    <div class="myaccount-menu">
+      <button
+        matIconButton
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button routerLink="removeaccount()" mat-menu-item>
+          <mat-icon>person_remove</mat-icon>
+          <span>Remove Account</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+      <div class="mainheader">
+      <div class="headerform">
+        <h2 class="myaccount-title">My Account</h2>
+        <p>View and edit your personal info below.</p>
+        <hr />
+      </div>
+      </div>
+
+  <form [formGroup]="myAccountForm" class="myaccount-form-content">
+    <div class="myaccount-form">
+
+      <div class="row-one">
+        <mat-form-field class="myaccount-form-field">
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="firstname"
+            placeholder="Enter your First Name"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field class="myaccount-form-field">
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="lastname"
+            placeholder="Enter your Last Name"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="row-two">
+        <mat-form-field class="myaccount-form-field">
+          <mat-label>Initials</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="initials"
+            placeholder="Enter your Initials"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field class="myaccount-form-field">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            placeholder="Enter your email"
+            readonly
+          />
+        </mat-form-field>
+      </div>
+      <div class="row-three">
+        <mat-form-field class="myaccount-form-field">
+          <mat-label>Old Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="oldpassword"
+            placeholder="Enter your password"
+            readonly
+          />
+        </mat-form-field>
+      </div>
+      <div class="row-four">
+        <mat-form-field class="myaccount-form-field">
+          <mat-label>New Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="newpassword"
+            placeholder="Enter your new password"
+            readonly
+          />
+        </mat-form-field>
+        <mat-form-field class="myaccount-form-field">
+          <mat-label>Confirm Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="confirmpassword"
+            placeholder="Confirm your password"
+            readonly
+          />
+        </mat-form-field>
+      </div>
+      <div class="row-five">
+        <button class="btnfullwidth" type="submit" (click)="updateAccount()">
+          Update Account
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

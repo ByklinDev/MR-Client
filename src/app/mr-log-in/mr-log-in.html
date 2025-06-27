@@ -1,0 +1,47 @@
+<div class="login-container">
+  <div class="loginright">
+    <img src="loginside.jpg" alt="loginside" height="560" />
+  </div>
+  <div class="loginform">
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+      <h2 class="titlelogin">LOG IN</h2>
+      <div class="loginfields">
+        <mat-form-field id="emaillogin">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            formControlName="emailLogin"
+            type="email"
+            required
+            placeholder="Enter your Email"
+          />
+        </mat-form-field>
+        <mat-form-field id="passwordlogin">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            formControlName="passwordLogin"
+            type="password"
+            required
+            placeholder="Enter your Password"
+          />
+        </mat-form-field>
+      </div>
+        <div class="rememberme">
+            <mat-checkbox formControlName="rememberLogin">
+            Remember Me
+            </mat-checkbox>      
+      </div>
+      <div>
+        <button
+          class="btnfullwidth"
+          mat-raised-button
+          color="primary"
+          type="submit"
+        >
+          Log In
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

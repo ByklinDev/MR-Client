@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>Add Clinic</h2>
+
+<mat-dialog-content>
+  <div class="add-container">
+    <div class="first-col">
+      <mat-form-field>
+        <mat-label>Clinic Name</mat-label>
+        <input matInput [(ngModel)]="name" placeholder="Enter clinic name" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>City</mat-label>
+        <input
+          matInput
+          [(ngModel)]="city"
+          placeholder="Enter city"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Phone</mat-label>
+        <input matInput [(ngModel)]="phone" placeholder="Enter Phone" />
+      </mat-form-field>
+    </div>
+    <div class="second-col">
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="address"
+          placeholder="Enter address"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Address2</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="address2"
+          placeholder="Enter Address2"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="10"
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="mainbtn" matButton [mat-dialog-close]="add()" cdkFocusInitial>Add</button>
+  <button class="cancelbtn" matButton (click)="onNoClick()">Cancel</button>
+</mat-dialog-actions>
+

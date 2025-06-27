@@ -1,0 +1,34 @@
+.btnsearch {
+  width: 110px;
+  background-color: #209973;
+  color: white;
+  height: 55px;
+  border-radius: 0.25rem;
+  margin-left: 20px;
+  border: none;
+  font-size: medium;
+}
+.btnsearch:hover {
+  background-color: #177155;
+  cursor: pointer;
+}
+.btnsearch:active {
+  background-color: #209973;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+}
+.search-container {
+  display: flex;
+  
+}
+.search-field > mat-form-field {
+  width: 400px;
+}
+.search-container {
+  height: 60px;
+  
+}
+

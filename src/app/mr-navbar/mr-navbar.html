@@ -1,0 +1,85 @@
+<div class="mr-navbar">
+  <div class="menuitem">
+    <button
+      routerLink=""
+      [class.active]="isActiveTab('home')"
+      (click)="setActiveTab('home')"
+    >
+      Home
+    </button>
+  </div>
+  <div class="menuitem">
+    <button
+      routerLink="clinics"
+      [class.active]="isActiveTab('clinics')"
+      (click)="setActiveTab('clinics')"
+    >
+      Clinics
+    </button>
+  </div>
+
+  <div class="menuitem">
+    <button
+      routerLink="medicines"
+      [class.active]="isActiveTab('medicines')"
+      (click)="setActiveTab('medicines')"
+    >
+      Medicines
+    </button>
+  </div>
+  <div class="menuitem">
+    <button
+      routerLink="supply"
+      [class.active]="isActiveTab('supply')"
+      (click)="setActiveTab('supply')"
+    >
+      Supply
+    </button>
+  </div>
+  <div class="menuitem">
+    <button
+      routerLink="research"
+      [class.active]="isActiveTab('research')"
+      (click)="setActiveTab('research')"
+    >
+      Research
+    </button>
+  </div>
+  <div class="menuitem">
+    <button
+      routerLink="patient"
+      [class.active]="isActiveTab('patient')"
+      (click)="setActiveTab('patient')"
+    >
+      New Patient
+    </button>
+  </div>
+  <div class="menuitem">
+    <button
+      routerLink="patientinfo"
+      [class.active]="isActiveTab('patientinfo')"
+      (click)="setActiveTab('patientinfo')"
+    >
+      Patient Info
+    </button>
+  </div>
+
+  <div class="menuitem">
+    <button
+      routerLink="signup"
+      [class.active]="isActiveTab('signup')"
+      (click)="setActiveTab('signup')"
+    >
+      Sign Up
+    </button>
+  </div>
+  <div class="menuitem">
+    <button
+      routerLink="login"
+      [class.active]="isActiveTab('login')"
+      (click)="setActiveTab('login')"
+    >
+      Log In
+    </button>
+  </div>
+</div>

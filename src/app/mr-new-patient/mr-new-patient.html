@@ -1,0 +1,53 @@
+<div class="patient-container">
+  <div class="form-container">
+    <form [formGroup]="patientForm" (ngSubmit)="addPatient()">
+      <h2 class="titlepatient">New Patient</h2>
+      <div class="allform">
+        <div class="patientfields">
+          <mat-form-field id="patientnumber">
+            <mat-label>Patient Number</mat-label>
+            <input
+              matInput
+              formControlName="patientNumber"
+              type="text"
+              required
+              placeholder="Enter patient number"
+            />
+          </mat-form-field>
+          <mat-form-field id="dateofbirth">
+            <mat-label>Date Of Birth</mat-label>
+            <input
+              matInput
+              formControlName="dateOfBirth"
+              type="date"
+              required
+              placeholder="Enter date of birth"
+            />
+          </mat-form-field>
+        </div>
+        <div class="male">
+          <mat-radio-group aria-label="Select gender" formControlName="gender">
+            <mat-radio-button value="1">Male</mat-radio-button>
+            <mat-radio-button value="2">Female</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div>
+          <button
+            class="btnfullwidth"
+            mat-raised-button
+            color="primary"
+            type="submit"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </form>
+    <div>
+      <p></p>
+    </div>
+  </div>
+  <div class="image-container">
+    <img src="newpatient.png" alt="doctor" width=400px />
+  </div>
+</div>

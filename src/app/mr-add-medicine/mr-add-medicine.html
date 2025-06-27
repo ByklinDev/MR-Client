@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>Add Medicine</h2>
+
+<mat-dialog-content>
+  <div class="add-container">
+    <div class="first-col">
+      <mat-form-field>
+        <mat-label>Medicine type</mat-label>
+        <input matInput [(ngModel)]="type" placeholder="Enter Medicine type" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Dosage form</mat-label>
+        <input
+          matInput
+          [(ngModel)]="dosageform"
+          placeholder="Enter Dosage Form"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Container</mat-label>
+        <input matInput [(ngModel)]="container" placeholder="Enter Container" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>State</mat-label>
+        <input matInput [(ngModel)]="state" placeholder="Enter State" />
+      </mat-form-field>
+    </div>
+    <div class="second-col">
+      <mat-form-field>
+        <mat-label>Expired</mat-label>
+        <input
+          matInput
+          type="date"
+          [(ngModel)]="expired"
+          placeholder="Enter Expired"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="description"
+          placeholder="Enter Description"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="12"
+          cdkAutosizeMaxRows="18"
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="mainbtn" matButton [mat-dialog-close]="add()" cdkFocusInitial>Add</button>
+  <button class="cancelbtn" matButton (click)="onNoClick()">Cancel</button>
+</mat-dialog-actions>

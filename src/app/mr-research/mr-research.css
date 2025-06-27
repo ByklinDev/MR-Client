@@ -1,0 +1,44 @@
+.research-container {
+  min-height: 70svh;
+  flex-wrap: wrap;
+  padding: 0 16px;
+  padding-top: 20px;
+  background-color: #faf9fd;
+  align-items: flex-start;
+}
+.research-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.btnaddpatient {
+  height: 55px;
+  width: 140px;
+  background-color: #209273;
+  color: white;
+  font-size: medium;
+}
+
+.btnaddpatient {
+  border-radius: 0.25rem;
+  border: 0px;
+}
+.btnaddpatient:hover {
+  background-color: #177155;
+  cursor: pointer;
+}
+.btnaddpatient:active {
+  background-color: #209973;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+}
+
+table {
+  width: 100%;
+}
+.table-content {
+  width: 100%;
+}

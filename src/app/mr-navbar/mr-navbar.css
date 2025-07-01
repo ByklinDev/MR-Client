@@ -15,7 +15,12 @@
   justify-content: center;
   text-align: center;
 }
-
+.hidelogin{
+  display: none;
+}
+.showlogin{
+  display: block;
+}
 .mr-navbar button {
   background-color: inherit;
   float: left;

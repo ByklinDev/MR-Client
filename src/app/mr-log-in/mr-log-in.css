@@ -1,8 +1,10 @@
 .login-container {
   display: flex;
+  padding: 0 16px;
   padding-top: 20px;
   min-height: 70svh;
-  justify-content: center;
+
+  justify-content: space-between;
   flex-flow: row nowrap;
   background-color: #faf9fd;
 }
@@ -13,6 +15,7 @@
 }
 .loginform {
   margin-top: 100px;
+  margin-left: 16px;
   width: 100%;
   max-width: 400px;
   height: 100%;

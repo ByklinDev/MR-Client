@@ -64,7 +64,7 @@
     </button>
   </div>
 
-  <div class="menuitem">
+  <div id="signup" class="menuitem" [class.hidelogin]="hideLogin()" [class.showlogin]="showLogin()">
     <button
       routerLink="signup"
       [class.active]="isActiveTab('signup')"
@@ -73,7 +73,7 @@
       Sign Up
     </button>
   </div>
-  <div class="menuitem">
+  <div id="login" class="menuitem" [class.hidelogin]="hideLogin()" [class.showlogin]="showLogin()"> 
     <button
       routerLink="login"
       [class.active]="isActiveTab('login')"

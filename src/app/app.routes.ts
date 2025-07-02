@@ -9,6 +9,8 @@ import { MrResearch } from './mr-research/mr-research';
 import { MrClinics } from './mr-clinics/mr-clinics';
 import { MrNewPatient } from './mr-new-patient/mr-new-patient';
 import { MrPatientInfo } from './mr-patient-info/mr-patient-info';
+import { M } from '@angular/cdk/keycodes';
+import { mrIsAuthenticateGuard } from './guards/mr-is-authenticate-guard';
 
 export const routes: Routes = [
   {
@@ -30,6 +32,7 @@ export const routes: Routes = [
   {
     path: 'medicines',
     component: MrMedicines,
+    canActivate: [mrIsAuthenticateGuard],
   },
   {
     path: 'supply',

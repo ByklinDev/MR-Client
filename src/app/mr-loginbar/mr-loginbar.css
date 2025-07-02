@@ -9,6 +9,19 @@
     border-radius: 2rem;  
 }
 
+.anonymous{
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  width: 100%;
+  transition: 0.3s;
+  color: #024959;
+  font-size: medium;
+}
+
 .userbtn {
     padding: 0px;
     height: 55px;

@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { first } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -47,10 +46,6 @@ export class MrSignUp {
         confirmpassword,
       } = this.signupForm.value;
 
-      console.log(
-        `Signing up user: ${firstname} ${lastname}, Email: ${emailsignup}`
-      );
-
       let req: MrSignUpInterface = {
         firstName: firstname || '',
         lastName: lastname || '',
@@ -62,8 +57,6 @@ export class MrSignUp {
 
       // Here you would typically call a service to handle the sign-up
       this.signUpService.signup(req);
-    } else {
-      console.error('Sign-up form is invalid');
     }
   }
 }

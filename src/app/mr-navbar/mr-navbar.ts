@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterLink } from '@angular/router';
-import { sign } from 'crypto';
 import { MrAuthService } from '../services/mr-auth-service';
 
 @Component({

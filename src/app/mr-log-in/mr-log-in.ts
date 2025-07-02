@@ -1,7 +1,6 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  signal,
   OnInit,
   inject,
 } from '@angular/core';
@@ -44,8 +43,6 @@ export class MrLogIn implements OnInit {
     if (this.loginForm.valid) {
       const { emailLogin, passwordLogin, rememberLogin } = this.loginForm.value;
       this.authService.login(emailLogin!, passwordLogin!, rememberLogin!);
-    } else {
-      console.error('Email or password is invalid');
     }
   }
 

@@ -4,7 +4,7 @@
       <app-mr-search></app-mr-search>
     </div>
     <div>
-      <button class="btnaddclinic" (click)="openDialog()">Add Clinic</button>
+      <button class="btnaddclinic" (click)="addDialog()">Add Clinic</button>
     </div>
   </div>
 
@@ -32,20 +32,29 @@
       </ng-container>
 
       <!-- Symbol Column -->
-      <ng-container matColumnDef="Address">
-        <th mat-header-cell *matHeaderCellDef>Address</th>
-        <td mat-cell *matCellDef="let element">{{element.address}}</td>
+      <ng-container matColumnDef="AddressOne">
+        <th mat-header-cell *matHeaderCellDef>AddressOne</th>
+        <td mat-cell *matCellDef="let element">{{element.addressOne}}</td>
       </ng-container>
 
       <!-- Symbol Column -->
-      <ng-container matColumnDef="Address2">
-        <th mat-header-cell *matHeaderCellDef>Address2</th>
-        <td mat-cell *matCellDef="let element">{{element.address2}}</td>
+      <ng-container matColumnDef="AddressTwo">
+        <th mat-header-cell *matHeaderCellDef>AddressTwo</th>
+        <td mat-cell *matCellDef="let element">{{element.addressTwo}}</td>
       </ng-container>
       <!-- Symbol Column -->
       <ng-container matColumnDef="Phone">
         <th mat-header-cell *matHeaderCellDef>Phone</th>
         <td mat-cell *matCellDef="let element">{{element.phone}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button matButton type="button"  (click)="edit(element)">
+            <mat-icon fontIcon="edit"></mat-icon>
+          </button>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

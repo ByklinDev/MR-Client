@@ -57,3 +57,8 @@
   font-weight: bold;
   color: #2d1c66;
 }
+.errortext{
+  color: #be4c59;
+  text-align: center;
+  margin-top: 2rem;
+}

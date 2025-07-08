@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Add Clinic</h2>
+<h2 mat-dialog-title>Edit Clinic</h2>
 
 <mat-dialog-content>
   <div class="add-container">
@@ -31,7 +31,7 @@
         />
       </mat-form-field>
       <mat-form-field>
-        <mat-label>AddressTwo</mat-label>
+        <mat-label>addressTwo</mat-label>
         <textarea
           matInput
           [(ngModel)]="addresstwo"
@@ -46,7 +46,8 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button class="mainbtn" matButton (click)="add()" cdkFocusInitial>Add</button>
+  <button class="mainbtn" matButton (click)="edit()" cdkFocusInitial>Update</button>
   <button class="cancelbtn" matButton (click)="onNoClick()">Cancel</button>
 </mat-dialog-actions>
+
 

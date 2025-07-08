@@ -6,6 +6,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RouterLink } from '@angular/router';
 import { MrAuthService } from '../services/mr-auth-service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { MrUserService } from '../services/mr-user-service';
 
 @Component({
   selector: 'app-mr-loginbar',
@@ -17,6 +18,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class MrLoginbar implements OnInit {
   private readonly authService = inject(MrAuthService);
   private readonly jwtHelper = inject(JwtHelperService);
+  private readonly userService = inject(MrUserService);
 
   userPhotoSrc = signal<string>('user_icon.png');
   userFirstName = signal('');
@@ -27,11 +29,13 @@ export class MrLoginbar implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.userService.imageSrc.set('user_icon.png'); // Reset image source on logout
   }
 
   ngOnInit() {
     // Initialize user name if available
     this.userFirstName = this.authService.userFirst;
     this.userSurname = this.authService.userLast;
+    this.userPhotoSrc = this.userService.imageSrc;
   }
 }

@@ -1,4 +1,3 @@
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import {
   afterNextRender,
   Component,
@@ -7,22 +6,24 @@ import {
   model,
   ViewChild,
 } from '@angular/core';
-import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogContent,
-  MatDialogTitle,
-} from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import {
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MrClinicService } from '../services/mr-clinic-service';
 import { MrAddClinicInterface } from '../interfaces/mr-add-clinic-interface';
+import { MrClinicService } from '../services/mr-clinic-service';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { MrClinicInterface } from '../mr-clinic-interface';
 
 @Component({
-  selector: 'app-mr-add-clinic',
+  selector: 'app-mr-edit-clinic',
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -32,22 +33,23 @@ import { MrAddClinicInterface } from '../interfaces/mr-add-clinic-interface';
     MatDialogContent,
     MatDialogActions,
   ],
-  templateUrl: './mr-add-clinic.html',
-  styleUrl: './mr-add-clinic.css',
+  templateUrl: './mr-edit-clinic.html',
+  styleUrl: './mr-edit-clinic.css',
 })
-export class MrAddClinic {
-  readonly dialogRef = inject(MatDialogRef<MrAddClinic>);
-  readonly data = inject<MrAddClinicInterface>(MAT_DIALOG_DATA);
+export class MrEditClinic {
+  readonly dialogRef = inject(MatDialogRef<MrEditClinic>);
+  readonly data = inject<MrClinicInterface>(MAT_DIALOG_DATA);
   private readonly clinicService = inject(MrClinicService);
-
+  readonly id = model(this.data.id);
   readonly name = model(this.data.name);
   readonly city = model(this.data.city);
   readonly addressone = model(this.data.addressOne);
   readonly addresstwo = model(this.data.addressTwo);
   readonly phone = model(this.data.phone);
-
-  add(): void {
-    const clinicData: MrAddClinicInterface = {
+  
+  edit(): void {
+    const clinicData: MrClinicInterface = {
+      id: this.id(),
       name: this.name(),
       city: this.city(),
       addressOne: this.addressone(),
@@ -55,7 +57,7 @@ export class MrAddClinic {
       phone: this.phone(),
     };
 
-    this.clinicService.addClinic(clinicData).subscribe({
+    this.clinicService.editClinic(clinicData).subscribe({
       next: () => {
         this.dialogRef.close(clinicData);
       },

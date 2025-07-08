@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   OnInit,
   inject,
+  signal,
 } from '@angular/core';
 import {
   FormControl,
@@ -39,6 +40,8 @@ export class MrLogIn implements OnInit {
     rememberLogin: new FormControl<boolean>(false),
   });
 
+  loginError = signal('');
+
   loginUser() {
     if (this.loginForm.valid) {
       const { emailLogin, passwordLogin, rememberLogin } = this.loginForm.value;
@@ -53,5 +56,6 @@ export class MrLogIn implements OnInit {
       passwordLogin: '',
       rememberLogin: localStorage.getItem('RememberMe') === 'true' || false,
     });
+    this.loginError = this.authService.loginError;
   }
 }

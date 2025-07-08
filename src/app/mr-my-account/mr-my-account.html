@@ -3,7 +3,7 @@
     <div class="userbtn">
       <img class="userphoto" [src]="userPhotoSrc()" alt="userphoto" />
       <div class="overlay">
-        <button matIconButton>
+        <button matIconButton (click)="selectFile()">
           <mat-icon>photo_camera</mat-icon>
         </button>
       </div>
@@ -20,24 +20,23 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button routerLink="removeaccount()" mat-menu-item>
+        <button (click)="removeAccount()" mat-menu-item>
           <mat-icon>person_remove</mat-icon>
           <span>Remove Account</span>
         </button>
       </mat-menu>
     </div>
   </div>
-      <div class="mainheader">
-      <div class="headerform">
-        <h2 class="myaccount-title">My Account</h2>
-        <p>View and edit your personal info below.</p>
-        <hr />
-      </div>
-      </div>
+  <div class="mainheader">
+    <div class="headerform">
+      <h2 class="myaccount-title">My Account</h2>
+      <p>View and edit your personal info below.</p>
+      <hr />
+    </div>
+  </div>
 
   <form [formGroup]="myAccountForm" class="myaccount-form-content">
     <div class="myaccount-form">
-
       <div class="row-one">
         <mat-form-field class="myaccount-form-field">
           <mat-label>First Name</mat-label>
@@ -104,7 +103,6 @@
             type="password"
             formControlName="newpassword"
             placeholder="Enter your new password"
-            readonly
           />
         </mat-form-field>
         <mat-form-field class="myaccount-form-field">
@@ -114,7 +112,6 @@
             type="password"
             formControlName="confirmpassword"
             placeholder="Confirm your password"
-            readonly
           />
         </mat-form-field>
       </div>

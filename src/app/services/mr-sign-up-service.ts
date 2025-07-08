@@ -15,7 +15,6 @@ export class MrSignUpService {
   constructor() {}
 
   signup(signupForm: MrSignUpInterface) {
-    console.log('Signing up with:', signupForm);
     return this.httpClient
       .post<MrSignUpResponseInterface>(
         `${environment.apiUrl}/users`,
@@ -24,7 +23,6 @@ export class MrSignUpService {
       )
       .subscribe({
         next: (response) => {
-          console.log('Sign up successful:', response);
           this.router.navigate(['/login']);
         },
         error: (error) => {

@@ -1,5 +1,4 @@
-export interface MrClinicInterface {
-  id: number;
+export interface MrAddClinicInterface {
   name: string;
   city: string;
   addressOne: string;

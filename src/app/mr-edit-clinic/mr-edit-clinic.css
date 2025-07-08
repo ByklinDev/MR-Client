@@ -1,0 +1,39 @@
+.add-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.first-col, .second-col{
+    width: 50%;
+
+}
+.mat-mdc-dialog-panel{
+ max-width: 700px;
+}
+
+.mat-dialog-content{
+  max-width: 700px;
+}
+.first-col > mat-form-field{
+  width: 300px;
+}
+.second-col > mat-form-field{
+  width: 320px;
+}
+
+mat-dialog-actions > .mainbtn{
+  background-color: #024959;
+  color: white;
+  border-radius: 0.25rem;
+  width: 120px;
+}
+
+mat-dialog-actions > .cancelbtn{
+  background-color: #c64b4b;
+  color: white;
+  border-radius: 0.25rem;
+  width: 120px;
+}
+h2 {
+  text-align: center;
+  color: #024959;
+}

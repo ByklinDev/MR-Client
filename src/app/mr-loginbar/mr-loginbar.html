@@ -1,12 +1,10 @@
 <div class="loginbar">
-  <div class="userbtn">
-    <img
-      class="userphoto"
-      [src]="userPhotoSrc()"
-      alt="userphoto"
-      height="64px"
-    />
+  <div class="imgborder">
+    <div class="userbtn">
+      <img class="userphoto" [src]="userPhotoSrc()" alt="userphoto" />
+    </div>
   </div>
+
   <div class="username-short">
     @if (userBarName().trim() === 'Log In') {
     <button class="anonymous" routerLink="login">Log In</button>
@@ -15,12 +13,12 @@
     }
   </div>
   <div class="usermenu">
-    <button
+    <button class="btnimage"
       matIconButton
       [matMenuTriggerFor]="menu"
       aria-label="Example icon-button with a menu"
     >
-      <mat-icon>arrow_drop_down</mat-icon>
+      <img class="iconimg" src="expand.png" alt="menu"/>
     </button>
     <mat-menu #menu="matMenu">
       <button routerLink="myaccount" mat-menu-item>

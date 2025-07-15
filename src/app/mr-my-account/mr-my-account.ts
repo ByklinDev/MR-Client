@@ -11,6 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MrAuthService } from '../services/mr-auth-service';
 import { MrUserService } from '../services/mr-user-service';
+import { response } from 'express';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mr-my-account',
@@ -27,6 +29,7 @@ import { MrUserService } from '../services/mr-user-service';
 export class MrMyAccount implements OnInit {
   private readonly authService = inject(MrAuthService);
   private readonly userService = inject(MrUserService);
+  private readonly router = inject(Router);
 
   userPhotoSrc = signal<string>('user_icon.png');
   myAccountForm = new FormGroup({
@@ -35,8 +38,8 @@ export class MrMyAccount implements OnInit {
     initials: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     oldpassword: new FormControl('', [Validators.required]),
-    newpassword: new FormControl('', [Validators.required]),
-    confirmpassword: new FormControl('', [Validators.required]),
+    newpassword: new FormControl(''),
+    confirmpassword: new FormControl(''),
   });
   userFirstName = signal<string>('');
   userSurname = signal<string>('');
@@ -76,7 +79,14 @@ export class MrMyAccount implements OnInit {
       };
 
       // Call the service to update user details
-      this.userService.updateUser(updateRequest);
+      this.userService.updateUser(updateRequest).subscribe({
+        next: (response) => {
+          this.authService.userFirst.set(response.firstName);
+          this.authService.userLast.set(response.lastName);
+          this.authService.userInitials.set(response.initials);
+          this.router.navigate(['/']);
+        },
+      });
     }
   }
 

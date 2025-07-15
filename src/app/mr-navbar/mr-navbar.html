@@ -8,7 +8,11 @@
       Home
     </button>
   </div>
-  <div class="menuitem">
+  <div
+    class="menuitem"
+    [class.hidelogin]="!isClinicsActive()"
+    [class.showlogin]="isClinicsActive()"
+  >
     <button
       routerLink="clinics"
       [class.active]="isActiveTab('clinics')"
@@ -18,7 +22,11 @@
     </button>
   </div>
 
-  <div class="menuitem">
+  <div
+    class="menuitem"
+    [class.hidelogin]="!isMedicinesActive()"
+    [class.showlogin]="isMedicinesActive()"
+  >
     <button
       routerLink="medicines"
       [class.active]="isActiveTab('medicines')"
@@ -27,7 +35,11 @@
       Medicines
     </button>
   </div>
-  <div class="menuitem">
+  <div
+    class="menuitem"
+    [class.hidelogin]="!isSupplyActive()"
+    [class.showlogin]="isSupplyActive()"
+  >
     <button
       routerLink="supply"
       [class.active]="isActiveTab('supply')"
@@ -36,7 +48,11 @@
       Supply
     </button>
   </div>
-  <div class="menuitem">
+  <div
+    class="menuitem"
+    [class.hidelogin]="!isResearchActive()"
+    [class.showlogin]="isResearchActive()"
+  >
     <button
       routerLink="research"
       [class.active]="isActiveTab('research')"
@@ -45,7 +61,11 @@
       Research
     </button>
   </div>
-  <div class="menuitem">
+  <div
+    class="menuitem"
+    [class.hidelogin]="!isNewPatientActive()"
+    [class.showlogin]="isNewPatientActive()"
+  >
     <button
       routerLink="patient"
       [class.active]="isActiveTab('patient')"
@@ -54,7 +74,11 @@
       New Patient
     </button>
   </div>
-  <div class="menuitem">
+  <div
+    class="menuitem"
+    [class.hidelogin]="!isPatientInfoActive()"
+    [class.showlogin]="isPatientInfoActive()"
+  >
     <button
       routerLink="patientinfo"
       [class.active]="isActiveTab('patientinfo')"
@@ -64,7 +88,12 @@
     </button>
   </div>
 
-  <div id="signup" class="menuitem" [class.hidelogin]="hideLogin()" [class.showlogin]="showLogin()">
+  <div
+    id="signup"
+    class="menuitem"
+    [class.hidelogin]="hideLogin()"
+    [class.showlogin]="showLogin()"
+  >
     <button
       routerLink="signup"
       [class.active]="isActiveTab('signup')"
@@ -73,7 +102,12 @@
       Sign Up
     </button>
   </div>
-  <div id="login" class="menuitem" [class.hidelogin]="hideLogin()" [class.showlogin]="showLogin()"> 
+  <div
+    id="login"
+    class="menuitem"
+    [class.hidelogin]="hideLogin()"
+    [class.showlogin]="showLogin()"
+  >
     <button
       routerLink="login"
       [class.active]="isActiveTab('login')"

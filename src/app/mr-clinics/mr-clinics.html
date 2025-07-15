@@ -1,7 +1,8 @@
 <div class="clinic-container">
   <div class="clinic-header">
     <div>
-      <app-mr-search></app-mr-search>
+      <app-mr-search (onSearchText)="search($event)">
+      </app-mr-search>
     </div>
     <div>
       <button class="btnaddclinic" (click)="addDialog()">Add Clinic</button>
@@ -9,49 +10,69 @@
   </div>
 
   <div class="table-content">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table
+      mat-table
+      matSort
+      [dataSource]="dataSource"
+      class="mat-elevation-z8"
+      (matSortChange)="announceSortChange($event)"
+    >
       <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
       <!-- Position Column -->
-      <ng-container matColumnDef="Id">
-        <th mat-header-cell *matHeaderCellDef>Id</th>
+      <ng-container matColumnDef="id">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Id"
+        >
+          Id
+        </th>
         <td mat-cell *matCellDef="let element">{{element.id}}</td>
       </ng-container>
 
       <!-- Name Column -->
-      <ng-container matColumnDef="Name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
+      <ng-container matColumnDef="name">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Name"
+        >
+          Name
+        </th>
         <td mat-cell *matCellDef="let element">{{element.name}}</td>
       </ng-container>
 
       <!-- Weight Column -->
-      <ng-container matColumnDef="City">
-        <th mat-header-cell *matHeaderCellDef>City</th>
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
         <td mat-cell *matCellDef="let element">{{element.city}}</td>
       </ng-container>
 
       <!-- Symbol Column -->
-      <ng-container matColumnDef="AddressOne">
+      <ng-container matColumnDef="addressOne">
         <th mat-header-cell *matHeaderCellDef>AddressOne</th>
         <td mat-cell *matCellDef="let element">{{element.addressOne}}</td>
       </ng-container>
 
       <!-- Symbol Column -->
-      <ng-container matColumnDef="AddressTwo">
+      <ng-container matColumnDef="addressTwo">
         <th mat-header-cell *matHeaderCellDef>AddressTwo</th>
         <td mat-cell *matCellDef="let element">{{element.addressTwo}}</td>
       </ng-container>
       <!-- Symbol Column -->
-      <ng-container matColumnDef="Phone">
+      <ng-container matColumnDef="phone">
         <th mat-header-cell *matHeaderCellDef>Phone</th>
         <td mat-cell *matCellDef="let element">{{element.phone}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="Actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <button matButton type="button"  (click)="edit(element)">
+          <button matButton type="button" (click)="edit(element)">
             <mat-icon fontIcon="edit"></mat-icon>
           </button>
         </td>

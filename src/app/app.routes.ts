@@ -27,6 +27,7 @@ export const routes: Routes = [
   {
     path: 'myaccount',
     component: MrMyAccount,
+    canActivate: [mrIsAuthenticateGuard],
   },
   {
     path: 'medicines',
@@ -36,21 +37,26 @@ export const routes: Routes = [
   {
     path: 'supply',
     component: MrSupply,
+    canActivate: [mrIsAuthenticateGuard],
   },
   {
     path: 'research',
     component: MrResearch,
+    canActivate: [mrIsAuthenticateGuard],
   },
   {
     path: 'clinics',
     component: MrClinics,
+    canActivate: [mrIsAuthenticateGuard],
   },
   {
     path: 'patient',
     component: MrNewPatient,
+    canActivate: [mrIsAuthenticateGuard],
   },
   {
     path: 'patientinfo',
     component: MrPatientInfo,
+    canActivate: [mrIsAuthenticateGuard],
   },
 ];

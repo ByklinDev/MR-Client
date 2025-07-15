@@ -5,23 +5,33 @@
     <div class="first-col">
       <mat-form-field>
         <mat-label>Medicine type</mat-label>
-        <input matInput [(ngModel)]="type" placeholder="Enter Medicine type" />
+        <mat-select [(ngModel)]="medicineTypeId">
+          @for (medicineType of medicineTypes; track medicineType.id) {
+          <mat-option [value]="medicineType.id"
+            >{{medicineType.name}}</mat-option
+          >
+          }
+        </mat-select>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Dosage form</mat-label>
-        <input
-          matInput
-          [(ngModel)]="dosageform"
-          placeholder="Enter Dosage Form"
-        />
+        <mat-select [(ngModel)]="dosageFormId">
+          @for (dosageForm of dosageForms; track dosageForm.id) {
+          <mat-option [value]="dosageForm.id">{{dosageForm.name}}</mat-option>
+          }
+        </mat-select>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Container</mat-label>
-        <input matInput [(ngModel)]="container" placeholder="Enter Container" />
+        <mat-select [(ngModel)]="medicineContainerId">
+          @for (container of medicineContainers; track container.id) {
+          <mat-option [value]="container.id">{{container.name}}</mat-option>
+          }
+        </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <mat-label>State</mat-label>
-        <input matInput [(ngModel)]="state" placeholder="Enter State" />
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" [(ngModel)]="amount" placeholder="Enter amount" />
       </mat-form-field>
     </div>
     <div class="second-col">
@@ -30,7 +40,7 @@
         <input
           matInput
           type="date"
-          [(ngModel)]="expired"
+          [(ngModel)]="expireAt"
           placeholder="Enter Expired"
         />
       </mat-form-field>
@@ -50,6 +60,8 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button class="mainbtn" matButton [mat-dialog-close]="add()" cdkFocusInitial>Add</button>
+  <button class="mainbtn" matButton (click)="add()" cdkFocusInitial>
+    Add
+  </button>
   <button class="cancelbtn" matButton (click)="onNoClick()">Cancel</button>
 </mat-dialog-actions>

@@ -6,7 +6,7 @@
   align-items: center;
   text-align: center;
   justify-content: center;
-  border-top: 4px solid #024959;
+  border-top: 4px solid #417FA6;
 }
 .menuitem {
   flex-grow: 1;
@@ -21,6 +21,9 @@
 .showlogin{
   display: block;
 }
+
+
+
 .mr-navbar button {
   background-color: inherit;
   float: left;
@@ -30,11 +33,11 @@
   padding: 14px 16px;
   width: 100%;
   transition: 0.3s;
-  color: #024959;
+  color: #417FA6;
   font-size: medium;
 }
 
 .mr-navbar button.active {
-  background-color: #024959;
+  background-color: #417FA6;
   color: white;
 }

@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MrClinicInterface } from '../mr-clinic-interface';
+import { MrClinicInterface } from '../interfaces/mr-clinic-interface';
 import { MrClinicStockMedicineInterface } from '../mr-clinic-stock-medicine-interface';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 

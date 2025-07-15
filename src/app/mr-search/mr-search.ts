@@ -1,7 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, input, model, output, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     MatInputModule,
     MatFormFieldModule,
+    FormsModule,
     ReactiveFormsModule,
     MatIconModule,
   ],
@@ -17,8 +18,9 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './mr-search.css',
 })
 export class MrSearch {
-  searchFunc = input();
-  searchForm = new FormGroup({
-    searchTerm: new FormControl(''),
-  });
+  onSearchText = output<string>();
+  term = signal('');
+  changeText(){
+    this.onSearchText.emit(this.term());
+  }
 }

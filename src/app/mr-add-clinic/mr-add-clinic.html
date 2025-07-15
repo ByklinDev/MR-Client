@@ -9,11 +9,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>City</mat-label>
-        <input
-          matInput
-          [(ngModel)]="city"
-          placeholder="Enter city"
-        />
+        <input matInput [(ngModel)]="city" placeholder="Enter city" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Phone</mat-label>
@@ -49,4 +45,3 @@
   <button class="mainbtn" matButton (click)="add()" cdkFocusInitial>Add</button>
   <button class="cancelbtn" matButton (click)="onNoClick()">Cancel</button>
 </mat-dialog-actions>
-

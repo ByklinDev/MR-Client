@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MrSearch } from '../mr-search/mr-search';
-import { MrClinicInterface } from '../mr-clinic-interface';
+import { MrClinicInterface } from '../interfaces/mr-clinic-interface';
 import { MatTableModule } from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -15,32 +15,47 @@ import { MrAddClinic } from '../mr-add-clinic/mr-add-clinic';
 import { MrClinicService } from '../services/mr-clinic-service';
 import { MatIconModule } from '@angular/material/icon';
 import { MrEditClinic } from '../mr-edit-clinic/mr-edit-clinic';
-import { MrAddClinicInterface } from '../interfaces/mr-add-clinic-interface';
+import { MatSortModule, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-mr-clinics',
-  imports: [MrSearch, MatPaginatorModule, MatTableModule, MatIconModule],
+  imports: [
+    MrSearch,
+    MatPaginatorModule,
+    MatTableModule,
+    MatIconModule,
+    MatSortModule,
+  ],
   templateUrl: './mr-clinics.html',
   styleUrl: './mr-clinics.css',
 })
 export class MrClinics implements AfterViewInit, OnInit {
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator = new MatPaginator();
-  displayedColumns: string[] = [
-    'Id',
-    'Name',
-    'City',
-    'AddressOne',
-    'AddressTwo',
-    'Phone',
-    'Actions',
-  ];
+
   private readonly clinicService = inject(MrClinicService);
+  private _liveAnnouncer = inject(LiveAnnouncer);
 
   dataSource = new MatTableDataSource<MrClinicInterface>();
 
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator = new MatPaginator();
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'city',
+    'addressOne',
+    'addressTwo',
+    'phone',
+    'actions',
+  ];
+
+  @ViewChild(MatSort)
+  sort: MatSort = new MatSort();
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   getClinics() {
@@ -72,7 +87,6 @@ export class MrClinics implements AfterViewInit, OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
       if (result !== undefined) {
         this.getClinics();
       }
@@ -96,6 +110,25 @@ export class MrClinics implements AfterViewInit, OnInit {
       if (result !== undefined) {
         this.getClinics();
       }
+    });
+  }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
+
+  search(text: string) {
+    this.clinicService.getClinics(text).subscribe({
+      next: (data) => {
+        this.dataSource.data = data as MrClinicInterface[];
+      },
+      error: (error) => {
+        console.error('Error fetching clinics:', error);
+      },
     });
   }
 }

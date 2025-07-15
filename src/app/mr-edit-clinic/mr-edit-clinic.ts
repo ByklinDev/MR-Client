@@ -17,10 +17,9 @@ import {
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MrAddClinicInterface } from '../interfaces/mr-add-clinic-interface';
 import { MrClinicService } from '../services/mr-clinic-service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { MrClinicInterface } from '../mr-clinic-interface';
+import { MrClinicInterface } from '../interfaces/mr-clinic-interface';
 
 @Component({
   selector: 'app-mr-edit-clinic',
@@ -46,7 +45,7 @@ export class MrEditClinic {
   readonly addressone = model(this.data.addressOne);
   readonly addresstwo = model(this.data.addressTwo);
   readonly phone = model(this.data.phone);
-  
+
   edit(): void {
     const clinicData: MrClinicInterface = {
       id: this.id(),

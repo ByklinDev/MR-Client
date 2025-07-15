@@ -29,21 +29,6 @@ export class MrAuthService {
       .subscribe({
         next: (response) => {
           localStorage.setItem(this.tokenKey, response.body?.token ?? '');
-          if (this.getClaim('firstName')) {
-            localStorage.setItem('firstName', this.getClaim('firstName'));
-          }
-          if (this.getClaim('lastName')) {
-            localStorage.setItem('lastName', this.getClaim('lastName'));
-          }
-          if (this.getClaim('sub')) {
-            localStorage.setItem('userId', this.getClaim('sub'));
-          }
-          if (this.getClaim('initials')) {
-            localStorage.setItem('userInitials', this.getClaim('initials'));
-          }
-          if (this.getClaim('email')) {
-            localStorage.setItem('userEmail', this.getClaim('email'));
-          }
 
           localStorage.removeItem('Email');
           localStorage.removeItem('RememberMe');
@@ -51,50 +36,52 @@ export class MrAuthService {
             localStorage.setItem('Email', email);
             localStorage.setItem('RememberMe', JSON.stringify(rememberMe));
           }
-          this.userFirst.set(`${this.getClaim('firstName')}`);
-          if (this.getClaim('lastName') !== null) {
-            this.userLast.set(`${this.getClaim('lastName')}`);
-          }
-          if (this.getClaim('sub') !== null) {
-            let id: string = this.getClaim('sub');
-            this.userId.set(parseInt(id, 10));
-          }
-          if (this.getClaim('initials') !== null) {
-            this.userInitials.set(`${this.getClaim('initials')}`);
-          }
-          if (this.getClaim('email') !== null) {
-            this.userEmail.set(`${this.getClaim('email')}`);
-          }
+          this.userFirst.set(`${this.getUserFirst()}`);
+          this.userLast.set(`${this.getUserLast()}`);
+          this.userId.set(this.getUserId());
+          this.userInitials.set(`${this.getUserInitials()}`);
+          this.userEmail.set(`${this.getUserEmail()}`);
           this.showLogin.set(false);
           this.hideLogin.set(true);
           this.userService.getUserImage(this.userId());
+          this.setAccessRights();
           this.router.navigate(['/']);
         },
         error: (error) => {
           this.loginError.set(error.error);
-        }}
-      );
+        },
+      });
   }
 
-  userFirst = signal(
-    `${localStorage.getItem('firstName') ?? 'Log In'}` || 'Log In'
-  );
-  userLast = signal(`${localStorage.getItem('lastName') ?? ''}` || '');
-  userId = signal<number>(parseInt(localStorage.getItem('userId') ?? '', 10));
-  userInitials = signal(`${localStorage.getItem('userInitials') ?? ''}` || '');
-  userEmail = signal(`${localStorage.getItem('userEmail') ?? ''}` || '');
+  userFirst = signal(`${this.getUserFirst()}`);
+  userLast = signal(`${this.getUserLast()}`);
+  userId = signal<number>(this.getUserId());
+  userInitials = signal(`${this.getUserInitials()}`);
+  userEmail = signal(`${this.getUserEmail()}`);
   userOldPassword = signal('**********');
   showLogin = signal<boolean>(this.userFirst() === 'Log In' ? true : false);
   hideLogin = signal<boolean>(this.userFirst() === 'Log In' ? false : true);
   loginError = signal('');
 
+  isClinicsActive = signal<boolean>(
+    this.isRoleActive('Admin') || this.isRoleActive('Sponsor')
+  );
+  isMyAccountActive = signal<boolean>(true);
+  isMedicinesActive = signal<boolean>(
+    this.isRoleActive('Admin') ||
+      this.isRoleActive('Sponsor') ||
+      this.isRoleActive('Manager')
+  );
+  isSupplyActive = signal<boolean>(this.isRoleActive('Admin') || this.isRoleActive('Manager'));
+  isResearchActive = signal<boolean>(this.isRoleActive('Admin') || this.isRoleActive('Sponsor') || this.isRoleActive('Researcher'));
+  isNewPatientActive = signal<boolean>(this.isRoleActive('Admin') || this.isRoleActive('Researcher'));
+  isPatientInfoActive = signal<boolean>(this.isRoleActive('Admin') || this.isRoleActive('Researcher'));
+
   logout() {
     localStorage.removeItem(this.tokenKey);
-    localStorage.removeItem('firstName');
-    localStorage.removeItem('lastName');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userInitials');
-    localStorage.removeItem('userEmail');
+    this.userService.imageSrc.set('user_icon.png'); // Reset user image
+    this.setAccessRights();
+    sessionStorage.removeItem('userimage');
     this.userFirst.set(`Log In`);
     this.userLast.set('');
     this.loginError.set('');
@@ -118,8 +105,132 @@ export class MrAuthService {
     return decodedToken ? decodedToken[claimKey] : null;
   }
 
+  getUserLast(): string {
+    const token = this.getAccessToken();
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      return decodedToken ? decodedToken.lastName || '' : '';
+    } else {
+      return '';
+    }
+  }
+
+  getUserFirst() {
+    const token = this.getAccessToken();
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      return decodedToken ? decodedToken.firstName || 'Log In' : 'Log In';
+    } else {
+      return 'Log In';
+    }
+  }
+
+  getUserId(): number {
+    const token = this.getAccessToken();
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      return decodedToken ? parseInt(decodedToken.sub, 10) || 0 : 0;
+    } else {
+      return 0;
+    }
+  }
+
+  getUserInitials(): string {
+    const token = this.getAccessToken();
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      return decodedToken ? decodedToken.initials || '' : '';
+    } else {
+      return '';
+    }
+  }
+
+  getUserEmail(): string {
+    const token = this.getAccessToken();
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      return decodedToken ? decodedToken.email || '' : '';
+    } else {
+      return '';
+    }
+  }
+
   isAuthenticated(): boolean {
     const token = this.getAccessToken();
     return !!token; // Returns true if token exists, false otherwise
+  }
+
+  isRoleActive(role: string): boolean {
+    const token = this.getAccessToken();
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      if (decodedToken) {
+        if (decodedToken.role === role) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  setAccessRights() {
+    this.isClinicsActive.set(false);
+    this.isMedicinesActive.set(false);
+    this.isMyAccountActive.set(false);
+    this.isNewPatientActive.set(false);
+    this.isPatientInfoActive.set(false);
+    this.isResearchActive.set(false);
+    this.isSupplyActive.set(false);
+
+    const token = this.getAccessToken();
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      if (decodedToken) {
+        console.log(decodedToken);
+        if (decodedToken.role === 'Admin') {
+          this.isClinicsActive.set(true);
+
+          this.isMyAccountActive.set(true);
+          this.isMedicinesActive.set(true);
+          this.isSupplyActive.set(true);
+          this.isResearchActive.set(true);
+          this.isNewPatientActive.set(true);
+          this.isPatientInfoActive.set(true);
+        }
+        if (decodedToken.role === 'Sponsor') {
+          this.isClinicsActive.set(true);
+        }
+        if (
+          decodedToken.role === 'Sponsor' ||
+          decodedToken.role === 'Researcher'
+        ) {
+          this.isResearchActive.set(true);
+        }
+
+        if (
+          decodedToken.role === 'Sponsor' ||
+          decodedToken.role === 'Researcher' ||
+          decodedToken.role === 'Manager'
+        ) {
+          this.isMyAccountActive.set(true);
+        }
+
+        if (
+          decodedToken.role === 'Sponsor' ||
+          decodedToken.role === 'Manager'
+        ) {
+          this.isMedicinesActive.set(true);
+        }
+
+        if (decodedToken.role === 'Manager') {
+          this.isSupplyActive.set(true);
+        }
+
+        if (decodedToken.role === 'Researcher') {
+          this.isNewPatientActive.set(true);
+          this.isPatientInfoActive.set(true);
+        }
+      }
+    }
   }
 }

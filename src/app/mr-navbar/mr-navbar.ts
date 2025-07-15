@@ -23,8 +23,23 @@ export class MrNavbar implements OnInit {
   showLogin = signal<boolean>(true);
   hideLogin = signal<boolean>(false);
 
+  isClinicsActive = signal<boolean>(this.authService.isClinicsActive());
+  isMyAccountActive = signal<boolean>(this.authService.isMyAccountActive());
+  isMedicinesActive = signal<boolean>(this.authService.isMedicinesActive());
+  isSupplyActive = signal<boolean>(this.authService.isSupplyActive());
+  isResearchActive = signal<boolean>(this.authService.isResearchActive());
+  isNewPatientActive = signal<boolean>(this.authService.isNewPatientActive());
+  isPatientInfoActive = signal<boolean>(this.authService.isPatientInfoActive());
+
   ngOnInit() {
     this.showLogin = this.authService.showLogin;
     this.hideLogin = this.authService.hideLogin;
+    this.isClinicsActive = this.authService.isClinicsActive;
+    this.isMyAccountActive = this.authService.isMyAccountActive;
+    this.isMedicinesActive = this.authService.isMedicinesActive;
+    this.isSupplyActive = this.authService.isSupplyActive;
+    this.isResearchActive = this.authService.isResearchActive;
+    this.isNewPatientActive = this.authService.isNewPatientActive;
+    this.isPatientInfoActive = this.authService.isPatientInfoActive;
   }
 }

@@ -21,19 +21,29 @@
 }
 
 mat-dialog-actions > .mainbtn{
-  background-color: #024959;
+  background-color: #326a8c;
   color: white;
   border-radius: 0.25rem;
-  width: 120px;
+  width: 130px;
+  height: 50px;
+  font-size: medium;
 }
 
+mat-dialog-actions > .mainbtn:hover{
+  background-color: #265877;
+  cursor: pointer;  
+}
+
+
 mat-dialog-actions > .cancelbtn{
-  background-color: #c64b4b;
+  background-color: #F24141;
   color: white;
   border-radius: 0.25rem;
-  width: 120px;
+  width: 130px;
+  height: 50px;
+  font-size: medium;
 }
 h2 {
   text-align: center;
-  color: #024959;
+  color: #326a8c;
 }

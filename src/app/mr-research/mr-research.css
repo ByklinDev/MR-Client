@@ -42,3 +42,7 @@ table {
 .table-content {
   width: 100%;
 }
+.mat-mdc-header-row {
+  background-color: #417FA6;
+  color: white;
+}

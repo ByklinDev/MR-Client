@@ -1,15 +1,28 @@
 .loginbar {
-    display: flex;
-    margin-top: 5px;
+  display: flex;
+  margin-top: 5px;
 }
 
-.userphoto{
-    display: block;
-    margin: 0 auto;  
-    border-radius: 50%;  
+.userphoto {
+  height: 100%;
+  width: auto;
+  border: 2px solid white;
+  vertical-align: middle;
 }
 
-.anonymous{
+.btnimage .iconimg {
+  width: 25px;
+}
+.btnimage {
+  margin-top: 20px;
+  background: none;
+  padding: 0;
+  padding-top: 5px;
+  border: 0;
+  cursor: pointer;
+}
+
+.anonymous {
   background-color: inherit;
   float: left;
   border: none;
@@ -23,20 +36,33 @@
 }
 
 .userbtn {
-    padding: 0px;
-    height: 55px;
-    margin-top: 12px;
-    margin-right: 10px;
+  height: 66px;
+  width: 66px;
+  border-radius: 50%;
+  border: 2px solid white;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
 }
 
+.imgborder {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  margin-right: 10px;
+  height: 76px;
+  width: 76px;
+  border-radius: 50%;
+}
 .username-short {
-    flex-grow: 1;
-    text-align: center;
-    padding-top: 10px;
-    font-size: medium;
-    color: #024959;
+  flex-grow: 1;
+  text-align: center;
+  padding-top: 10px;
+  font-size: medium;
+  color: #024959;
 }
 
-.usermenu{
-    padding-top: 1px;
+.usermenu {
+  padding-top: 1px;
 }

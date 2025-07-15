@@ -1,6 +1,6 @@
 .btnsearch {
   width: 110px;
-  background-color: #209973;
+  background-color: #1BBFA1;
   color: white;
   height: 55px;
   border-radius: 0.25rem;
@@ -9,11 +9,11 @@
   font-size: medium;
 }
 .btnsearch:hover {
-  background-color: #177155;
+  background-color: #0d8a73;
   cursor: pointer;
 }
 .btnsearch:active {
-  background-color: #209973;
+  background-color: #1BBFA1;
   cursor: pointer;
   -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
   -moz-box-shadow: inset 0px 0px 5px #c1c1c1;

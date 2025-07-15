@@ -30,7 +30,6 @@ import { MrAuthService } from '../services/mr-auth-service';
 })
 export class MrLogIn implements OnInit {
   private readonly authService = inject(MrAuthService);
-
   loginForm = new FormGroup({
     emailLogin: new FormControl<string>('', [
       Validators.required,

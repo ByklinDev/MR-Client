@@ -1,16 +1,14 @@
 <div class="searchcontainer">
-  <form [formGroup]="searchForm" (ngSubmit)="searchFunc()">
-    <div class="search-container">
-      <div class="search-field">
-        <mat-form-field class="mr-form-field">
-          <mat-label>Search</mat-label>
-          <input matInput type="search" placeholder="Search" />
-          <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
-      </div>
-      <div class="search-btn">
-        <button class="btnsearch" type="submit">Go</button>
-      </div>
+  <div class="search-container">
+    <div class="search-field">
+      <mat-form-field class="mr-form-field">
+        <mat-label>Search</mat-label>
+        <input matInput type="search" placeholder="Search" [(ngModel)]="term" />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
     </div>
-  </form>
+    <div class="search-btn">
+      <button class="btnsearch" type="button" (click)="changeText()">Go</button>
+    </div>
+  </div>
 </div>

@@ -22,7 +22,7 @@
 .btn-add-medicine {
   width: 160px;
   height: 55px;
-  background-color: #209973;
+  background-color: #1bbfa1;
   color: white;
   font-size: medium;
 }
@@ -32,20 +32,86 @@
   border: 0px;
 }
 .btn-add-medicine:hover {
-  background-color: #177155;
+  background-color: #0d8a73;
   cursor: pointer;
 }
 .btn-add-medicine:active {
-  background-color: #209973;
+  background-color: #1bbfa1;
   cursor: pointer;
   -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
   -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
   box-shadow: inset 0px 0px 5px #c1c1c1;
   outline: none;
 }
-.table-content{
-    width: 100%;
+
+table {
+  width: 100%;
+  border: 3px solid #4e94bf;
+  border-radius: 5px;
 }
-.table-content >table{
-    width: 100%;
+
+th,
+td {
+  border: 0px solid #4e94bf;
+}
+
+.table-content {
+  width: 100%;
+}
+
+tr:nth-child(even) {
+  background-color: #d6eeee;
+}
+
+.mat-column-id {
+  width: 32px;
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-medicineType {
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-description {
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-dosageForm {
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-medicineContainer {
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-state {
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-expireAt {
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-mdc-header-row {
+  background-color: #417fa6;
+  color: white;
+  font-size: medium;
+}
+.mat-column-actions {
+  width: 120px;
+  padding-right: 20px;
+  text-align: center;
+}
+.btnfirst {
+  margin-right: 10px;
 }

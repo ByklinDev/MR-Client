@@ -99,13 +99,6 @@ export class MrUserService {
         `${environment.apiUrl}/users/${updateForm.id}`,
         updateForm,
         { responseType: 'json' }
-      )
-      .subscribe({
-        next: (response) => {
-        },
-        error: (error) => {
-          console.error('User update failed:', error);
-        },
-      });
+      );
   }
 }

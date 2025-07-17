@@ -1,8 +1,7 @@
 <div class="medicines-container">
   <div class="medicines-header">
     <div>
-      <app-mr-search (onSearchText)="search($event)"> 
-         </app-mr-search>
+      <app-mr-search (onSearchText)="search($event)"> </app-mr-search>
     </div>
     <div class="btn-container">
       <button class="btn-add-medicine" (click)="addDialog()">
@@ -12,19 +11,39 @@
   </div>
 
   <div class="table-content">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8"
+      matSort
+      (matSortChange)="announceSortChange($event)"
+    >
       <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
       <!-- Position Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Id"
+        >
+          No.
+        </th>
         <td mat-cell *matCellDef="let element">{{element.id}}</td>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="medicineType">
-        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by MedicineType"
+        >
+          Type
+        </th>
         <td mat-cell *matCellDef="let element">
           {{element.medicineType.name}}
         </td>
@@ -32,33 +51,68 @@
 
       <!-- Weight Column -->
       <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Description"
+        >
+          Description
+        </th>
         <td mat-cell *matCellDef="let element">{{element.description}}</td>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="dosageForm">
-        <th mat-header-cell *matHeaderCellDef>DosageForm</th>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Dosage Form"
+        >
+          DosageForm
+        </th>
         <td mat-cell *matCellDef="let element">{{element.dosageForm.name}}</td>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="medicineContainer">
-        <th mat-header-cell *matHeaderCellDef>Container</th>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Container"
+        >
+          Container
+        </th>
         <td mat-cell *matCellDef="let element">
           {{element.medicineContainer.name}}
         </td>
       </ng-container>
       <!-- Symbol Column -->
       <ng-container matColumnDef="state">
-        <th mat-header-cell *matHeaderCellDef>State</th>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by State"
+        >
+          State
+        </th>
         <td mat-cell *matCellDef="let element">
           {{element.state | mrMedicineState}}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="expireAt">
-        <th mat-header-cell *matHeaderCellDef>Expired</th>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Expire Date"
+        >
+          Expired
+        </th>
         <td mat-cell *matCellDef="let element">
           {{element.expireAt | date: 'dd.MM.yyyy' }}
         </td>

@@ -80,16 +80,6 @@ export class MrUserService {
     return this.httpClient
       .get(`${environment.apiUrl}/users/${userId}/photo`, {
         responseType: 'text',
-      })
-      .subscribe({
-        next: (response) => {
-          const imagesrc = response as string;
-          this.imageSrc.set(imagesrc);
-          sessionStorage.setItem(`userimage`, imagesrc); // Store the image in session storage);
-        },
-        error: (error) => {
-          console.error('Failed to retrieve user image:', error);
-        },
       });
   }
 

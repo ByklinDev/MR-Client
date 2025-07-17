@@ -50,9 +50,14 @@ table {
   border-radius: 5px;
 }
 
+th{
+  text-align: center;
+}
+
 th,
 td {
   border: 0px solid #4e94bf;
+  
 }
 
 .table-content {
@@ -106,6 +111,7 @@ tr:nth-child(even) {
   background-color: #417fa6;
   color: white;
   font-size: medium;
+  text-align: center;
 }
 .mat-column-actions {
   width: 120px;

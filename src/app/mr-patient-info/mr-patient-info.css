@@ -1,67 +1,66 @@
-.info-title{
-    text-align: center;
-     font-size: 24px;
+.info-title {
+  text-align: center;
+  font-size: 24px;
   font-weight: bold;
-  color: #2d1c66;
+  color: #326a8c;
   padding-top: 30px;
   margin-bottom: 10px;
 }
-.pairs-container{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.pairs-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
-.pair{
-    display: flex;
+.pair {
+  display: flex;
   width: 30%;
-  margin-bottom: 15px; 
-  border:1px solid black;
-  border-radius: 0.25rem; 
+  margin-bottom: 15px;
+  border: 1px solid black;
+  border-radius: 0.25rem;
 }
-.def{
-    width: 160px;
-    height: 40px;
-    align-content: center;
-    padding-left: 10px;
-    background-color: #8bd8c4;
-    border-radius: 0.25rem  0 0 0.25rem;
+.def {
+  width: 160px;
+  height: 40px;
+  align-content: center;
+  padding-left: 10px;
+  background-color: #8bd8c4;
+  border-radius: 0.25rem 0 0 0.25rem;
 }
-.info-val{
-    width: 100%;
-    height: 40px;
-    align-content: center;
-    padding-left: 10px;
-    background-color: white;
-    border-radius: 0 0.25rem 0.25rem 0;
- border-left:1px solid black;
-}
-
-.info-container{
-    background-color: #faf9fd;
-    padding: 0 16px;
-    min-height: 75svh;
+.info-val {
+  width: 100%;
+  height: 40px;
+  align-content: center;
+  padding-left: 10px;
+  background-color: white;
+  border-radius: 0 0.25rem 0.25rem 0;
+  border-left: 1px solid black;
 }
 
-.actions-container{
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
-    padding-top: 30px;
-}
-.actions-container > button{
-    height: 55px;
-    width: 140px;
-    border-radius: 0.25rem;
+.info-container {
+  background-color: #faf9fd;
+  padding: 0 16px;
+  min-height: 75svh;
 }
 
-#performvisitbtn{
-    margin-right: 40px;
-    background-color: #024959;
-    border-radius: 0.25rem;
-    color: white;
-    font-size: medium;
-    border: 0px;
+.actions-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding-top: 30px;
+}
+.actions-container > button {
+  height: 55px;
+  width: 140px;
+  border-radius: 0.25rem;
+}
 
+#performvisitbtn {
+  margin-right: 40px;
+  background-color: #326a8c;
+  border-radius: 0.25rem;
+  color: white;
+  font-size: medium;
+  border: 0px;
 }
 
 #performvisitbtn:hover {
@@ -71,17 +70,16 @@
 #performvisitbtn:active {
   background-color: #022f3d;
   cursor: pointer;
-   -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
-     -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
-          box-shadow: inset 0px 0px 5px #c1c1c1;
-   outline: none;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
 }
-#endparty{
-    background-color: #c64b4b;
-    color: white;
-    font-size: medium;
-    border: 0px;
-
+#endparty {
+  background-color: #c64b4b;
+  color: white;
+  font-size: medium;
+  border: 0px;
 }
 #endparty:hover {
   background-color: #830f34;
@@ -90,8 +88,53 @@
 #endparty:active {
   background-color: #93143c;
   cursor: pointer;
-   -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
-     -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
-          box-shadow: inset 0px 0px 5px #c1c1c1;
-   outline: none;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+}
+
+table {
+  width: 100%;
+  border: 3px solid #4e94bf;
+  border-radius: 5px;
+}
+
+th {
+  text-align: center;
+}
+
+th,
+td {
+  border: 0px solid #4e94bf;
+}
+
+.table-content {
+  width: 100%;
+}
+
+tr:nth-child(even) {
+  background-color: #d6eeee;
+}
+
+.mat-mdc-header-row {
+  background-color: #417fa6;
+  color: white;
+  font-size: medium;
+  text-align: center;
+}
+
+.mat-column-Number {
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-Date {
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-Medicine {
+  padding-right: 24px;
+  text-align: center;
 }

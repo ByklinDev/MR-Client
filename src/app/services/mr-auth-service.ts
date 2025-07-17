@@ -19,7 +19,6 @@ export class MrAuthService {
 
   login(email: string, password: string, rememberMe: boolean) {
     // Login request to the server
-    console.log(`Logging in with email: ${email}`);
     return this.httpClient
       .post<MrLoginResponseInterface>(
         `${environment.authUrl}/login`,
@@ -43,7 +42,12 @@ export class MrAuthService {
           this.userEmail.set(`${this.getUserEmail()}`);
           this.showLogin.set(false);
           this.hideLogin.set(true);
-          this.userService.getUserImage(this.userId());
+          this.userService.getUserImage(this.userId()).subscribe({
+            next: (response) => {
+              const imagesrc = response as string;
+              this.userService.imageSrc.set(imagesrc);
+              sessionStorage.setItem(`userimage`, imagesrc); // Store the image in session storage
+            }});
           this.setAccessRights();
           this.router.navigate(['/']);
         },
@@ -186,7 +190,6 @@ export class MrAuthService {
     if (token) {
       const decodedToken = this.decodeToken(token);
       if (decodedToken) {
-        console.log(decodedToken);
         if (decodedToken.role === 'Admin') {
           this.isClinicsActive.set(true);
 

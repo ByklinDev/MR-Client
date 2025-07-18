@@ -37,7 +37,6 @@ import { MrMedicineStatePipe } from '../pipes/mr-medicine-state-pipe';
   styleUrl: './mr-medicines.css',
 })
 export class MrMedicines implements AfterViewInit, OnInit {
-  
   private readonly medicineService = inject(MrMedicineService);
   private _liveAnnouncer = inject(LiveAnnouncer);
 
@@ -62,16 +61,15 @@ export class MrMedicines implements AfterViewInit, OnInit {
 
   search(text: string) {
     console.log('Search text:', text);
-      this.medicineService.getMedicines(text).subscribe({
-        next: (data) => {
-          this.dataSource.data = data as MrMedicineInterface[];
-        },
-        error: (error) => {
-          console.error('Error fetching medicines:', error);
-        },
-      });
-    }
-
+    this.medicineService.getMedicines(text).subscribe({
+      next: (data) => {
+        this.dataSource.data = data as MrMedicineInterface[];
+      },
+      error: (error) => {
+        console.error('Error fetching medicines:', error);
+      },
+    });
+  }
 
   edit(medicine: MrMedicineInterface) {
     this.editDialog(medicine);
@@ -93,6 +91,7 @@ export class MrMedicines implements AfterViewInit, OnInit {
   ngOnInit() {
     this.medicineService.getAllMedicines().subscribe((medicines) => {
       this.dataSource.data = medicines;
+      this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
     });
   }
   readonly dialog = inject(MatDialog);
@@ -168,4 +167,27 @@ export class MrMedicines implements AfterViewInit, OnInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
+
+  sortingDataAccessor = (data: MrMedicineInterface, sortHeaderId: string) => {
+    if (sortHeaderId === 'medicineType') {
+      return data.medicineType.name;
+    } else if (sortHeaderId === 'dosageForm') {
+      return data.dosageForm.name;
+    } else if (sortHeaderId === 'medicineContainer') {
+      return data.medicineContainer.name;
+    } else if (sortHeaderId === 'expireAt') {
+      return new Date(data.expireAt).getTime();
+    } else if (sortHeaderId === 'state') {
+      return data.state;
+    } else if (sortHeaderId === 'description') {
+      return data.description.toLowerCase();
+    } else if (sortHeaderId === 'id') {
+      return data.id;
+    } else if (sortHeaderId === 'amount') {
+      return data.amount;
+    } else if (sortHeaderId === 'createdAt') {
+      return new Date(data.createdAt).getTime();
+    }
+    return '';
+  };
 }

@@ -24,31 +24,47 @@
 .select-fields {
   width: 350px;
 }
+#minusamount {
+  margin-left: 10px;
+}
+
+#plusamount {
+  margin-right: 10px;
+}
+
 #minusamount,
 #plusamount {
   width: 70px;
-  height: 57px;
-  background-color: #209973;
+  height: 56px;
+  background-color: #1bbfa1;
   color: white;
   border-radius: 0.25rem;
   font-size: 25pt;
+  border: 0px;
 }
-#minusamount,
+#minusamount:hover {
+  cursor: pointer;
+
+  background-color: #0d8a73;
+}
 #plusamount:hover {
   cursor: pointer;
+  background-color: #0d8a73;
 }
 
 .amountgroup {
   display: flex;
+  width: 250px;
 }
 
 .amountgroup > mat-form-field {
   display: block;
+  width: 100px;
 }
 .btnaddmed {
   height: 57px;
   width: 150px;
-  background-color: #209973;
+  background-color: #1bbfa1;
   color: white;
   font-size: medium;
 }
@@ -58,11 +74,11 @@
   border: 0px;
 }
 .btnaddmed:hover {
-  background-color: #177155;
+  background-color: #0d8a73;
   cursor: pointer;
 }
 .btnaddmed:active {
-  background-color: #209973;
+  background-color: #1bbfa1;
   cursor: pointer;
   -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
   -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
@@ -85,19 +101,82 @@ table {
   width: 100%;
   display: flex;
 }
+
+.btnsupply:active {
+  background-color: #326a8c;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+}
 .btnsupply {
   width: 140px;
-  background-color: #024959;
+  margin-top: 30px;
+  background-color: #326a8c;
   color: white;
   height: 55px;
   border-radius: 0.25rem;
+  border: none;
   font-size: medium;
 }
 .btnsupply:hover {
-  background-color: #0a6a9b;
+  background-color: #265877;
   cursor: pointer;
 }
 .mat-mdc-header-row {
-  background-color: #417FA6;
+  background-color: #417fa6;
   color: white;
+  font-size: medium;
+}
+
+table {
+  width: 100%;
+  border: 3px solid #4e94bf;
+  border-radius: 5px;
+}
+
+th,
+td {
+  border: 0px solid #4e94bf;
+}
+
+.table-content {
+  width: 100%;
+}
+
+tr:nth-child(even) {
+  background-color: #d6eeee;
+}
+
+.mat-column-clinicName {
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-medicineDescription {
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-actions {
+  width: 100px;
+  text-align: center;
+}
+.mat-column-amount {
+  width: 100px;
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+.search-field {
+  width: 350px;
+  margin-left: 0px;
+  margin-top: 0px;
+  border-bottom: 0px solid #4e94bf;
+}
+.mdc-text-field {
+  background-color: white !important;
 }

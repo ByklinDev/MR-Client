@@ -3,76 +3,126 @@
     <div>
       <mat-form-field class="select-fields" id="supplyclinic">
         <mat-label>Choose the clinic</mat-label>
-        <mat-select>
-          <input matInput placeholder="Search">
-          @for (clinic of clinics; track clinic) {
+        <mat-select [(ngModel)]="clinicId">
+          <mat-form-field class="search-field">
+            <mat-label>Search Clinic</mat-label>
+
+            <input
+              type="search"
+              placeholder="Search"
+              (keyup)="onKeyClinic($event)"
+              matInput
+            />
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+          @for (clinic of filteredClinics; track clinic) {
           <mat-option [value]="clinic.id">{{clinic.name}}</mat-option>
           }
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="select-fields">
-        <mat-label>Choose the medicine from stock</mat-label>
-        <mat-select>
-          @for (stock of stockMedicines; track stock) {
-          <mat-option [value]="stock.MedicineId"
-            >{{stock.Description}}</mat-option
+        <mat-label>Choose the medicine</mat-label>
+        <mat-select [(ngModel)]="medicineId">
+          <mat-form-field class="search-field">
+            <input
+              type="search"
+              placeholder="Search"
+              (keyup)="onKeyMed($event)"
+              matInput
+            />
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+
+          @for (medicine of filteredMedicines; track medicine.id) {
+          <mat-option [value]="medicine.id"
+            >{{medicine.description}}</mat-option
           >
           }
         </mat-select>
       </mat-form-field>
     </div>
     <div class="amountgroup">
-      <button id="minusamount">-</button>
+      <button type="button" id="minusamount" (click)="minus()">-</button>
       <mat-form-field>
         <mat-label>Amount</mat-label>
         <input
           matInput
           [(ngModel)]="amount"
-          type="number"
+          type="text"
+          pattern="[0-9]*"
+          inputmode="numeric"
           required
           placeholder="Enter amount"
         />
       </mat-form-field>
-      <button id="plusamount">+</button>
+      <button type="button" id="plusamount" (click)="plus()">+</button>
     </div>
     <div>
-      <button class="btnaddmed">Add Medicine</button>
+      <button class="btnaddmed" (click)="addToSupply()">Add Medicine</button>
     </div>
   </div>
 
   <div class="table-content">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8"
+      matSort
+      (matSortChange)="announceSortChange($event)"
+    >
       <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
       <!-- Position Column -->
-      <ng-container matColumnDef="ClinicId">
-        <th mat-header-cell *matHeaderCellDef>ClinicId</th>
-        <td mat-cell *matCellDef="let element">{{element.ClinicId}}</td>
-      </ng-container>
 
-      <ng-container matColumnDef="ClinicName">
-        <th mat-header-cell *matHeaderCellDef>ClinicName</th>
-        <td mat-cell *matCellDef="let element">{{element.ClinicName}}</td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="MedicineId">
-        <th mat-header-cell *matHeaderCellDef>MedicineId</th>
-        <td mat-cell *matCellDef="let element">{{element.MedicineId }}</td>
+      <ng-container matColumnDef="clinicName">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Clinic"
+        >
+          Clinic
+        </th>
+        <td mat-cell *matCellDef="let element">{{element.clinicName}}</td>
       </ng-container>
 
       <!-- Weight Column -->
-      <ng-container matColumnDef="Description">
-        <th mat-header-cell *matHeaderCellDef>Description</th>
-        <td mat-cell *matCellDef="let element">{{element.Description}}</td>
+      <ng-container matColumnDef="medicineDescription">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Medicine"
+        >
+          Medicine
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.medicineDescription}}
+        </td>
       </ng-container>
 
       <!-- Symbol Column -->
-      <ng-container matColumnDef="Amount">
-        <th mat-header-cell *matHeaderCellDef>Amount</th>
-        <td mat-cell *matCellDef="let element">{{element.Amount}}</td>
+      <ng-container matColumnDef="amount">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Amount"
+        >
+          Amount
+        </th>
+        <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <button matButton type="button" (click)="delete(element)">
+            <mat-icon fontIcon="delete"></mat-icon>
+          </button>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -80,6 +130,6 @@
     </table>
   </div>
   <div class="btn-container">
-    <button class="btnsupply">Supply Medicine</button>
+    <button class="btnsupply" (click)="addSupplies()">Supply Medicine</button>
   </div>
 </div>

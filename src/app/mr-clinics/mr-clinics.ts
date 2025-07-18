@@ -121,6 +121,7 @@ export class MrClinics implements AfterViewInit, OnInit {
     }
   }
 
+  
   search(text: string) {
     this.clinicService.getClinics(text).subscribe({
       next: (data) => {

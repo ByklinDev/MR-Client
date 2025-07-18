@@ -5,8 +5,8 @@
     text-align: center;
      font-size: 24px;
   font-weight: bold;
-  color: #2d1c66;
-  margin-top: 100px;
+  color: #326A8C;
+  margin-top: 50px;
   margin-bottom: 80px;
 }
 .patient-container{
@@ -39,7 +39,7 @@
     height: 55px;
     border: 0px;
     border-radius: 0.25rem;
-    background-color: #024959;
+    background-color: #326A8C;
     color: white;
     margin-top: 80px;
     font-size: medium;
@@ -50,7 +50,7 @@
   cursor: pointer;
 }
 .btnfullwidth:active {
-  background-color: #022f3d;
+  background-color: #326A8C;
   cursor: pointer;
    -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
      -moz-box-shadow: inset 0px 0px 5px #c1c1c1;

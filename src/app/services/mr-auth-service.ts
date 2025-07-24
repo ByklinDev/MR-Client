@@ -47,7 +47,8 @@ export class MrAuthService {
               const imagesrc = response as string;
               this.userService.imageSrc.set(imagesrc);
               sessionStorage.setItem(`userimage`, imagesrc); // Store the image in session storage
-            }});
+            },
+          });
           this.setAccessRights();
           this.router.navigate(['/']);
         },
@@ -76,10 +77,20 @@ export class MrAuthService {
       this.isRoleActive('Sponsor') ||
       this.isRoleActive('Manager')
   );
-  isSupplyActive = signal<boolean>(this.isRoleActive('Admin') || this.isRoleActive('Manager'));
-  isResearchActive = signal<boolean>(this.isRoleActive('Admin') || this.isRoleActive('Sponsor') || this.isRoleActive('Researcher'));
-  isNewPatientActive = signal<boolean>(this.isRoleActive('Admin') || this.isRoleActive('Researcher'));
-  isPatientInfoActive = signal<boolean>(this.isRoleActive('Admin') || this.isRoleActive('Researcher'));
+  isSupplyActive = signal<boolean>(
+    this.isRoleActive('Admin') || this.isRoleActive('Manager')
+  );
+  isResearchActive = signal<boolean>(
+    this.isRoleActive('Admin') ||
+      this.isRoleActive('Sponsor') ||
+      this.isRoleActive('Researcher')
+  );
+  isNewPatientActive = signal<boolean>(
+    this.isRoleActive('Admin') || this.isRoleActive('Researcher')
+  );
+  isPatientInfoActive = signal<boolean>(
+    this.isRoleActive('Admin') || this.isRoleActive('Researcher')
+  );
 
   logout() {
     localStorage.removeItem(this.tokenKey);

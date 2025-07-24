@@ -39,7 +39,6 @@ export class MrMedicineService {
     );
   }
   addMedicine(medicine: MrAddMedicineInterface) {
-    console.log(medicine);
     return this.httpClient.post<MrMedicineInterface>(
       `${environment.apiUrl}/medicines`,
       medicine,
@@ -55,6 +54,12 @@ export class MrMedicineService {
       {
         responseType: 'json',
       }
+    );
+  }
+
+  getMedicine(id: number) {
+    return this.httpClient.get<MrMedicineInterface>(
+      `${environment.apiUrl}/medicines/${id}`
     );
   }
   constructor() {}

@@ -1,10 +1,16 @@
 <div class="research-container">
   <div class="research-header">
     <div>
-      <app-mr-search></app-mr-search>
+      <app-mr-search (onSearchText)="search($event)"></app-mr-search>
     </div>
     <div>
-      <button class="btnaddpatient">Add Patient</button>
+      <button
+        class="btnaddpatient"
+        (click)="addPatient()"
+        [disabled]="!isAddActive()"
+      >
+        Add Patient
+      </button>
     </div>
   </div>
   <div>
@@ -14,31 +20,43 @@
         The actual rendered columns are set as a property on the row definition" -->
 
         <!-- Position Column -->
-        <ng-container matColumnDef="PatientNumber">
+        <ng-container matColumnDef="patientNumber">
           <th mat-header-cell *matHeaderCellDef>PatientNumber</th>
-          <td mat-cell *matCellDef="let element">{{element.PatientNumber}}</td>
+          <td mat-cell *matCellDef="let element">
+            <a routerLink="/patientinfo/{{element.id}}">{{element.number}}</a>
+          </td>
         </ng-container>
 
-        <ng-container matColumnDef="DateOfBirth">
+        <ng-container matColumnDef="dateOfBirth">
           <th mat-header-cell *matHeaderCellDef>DateOfBirth</th>
-          <td mat-cell *matCellDef="let element">{{element.DateOfBirth}}</td>
+          <td mat-cell *matCellDef="let element">
+            {{element.dateOfBirth | date: 'dd.MM.yyyy'}}
+          </td>
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container matColumnDef="LastVisitDate">
+        <ng-container matColumnDef="lastVisitDate">
           <th mat-header-cell *matHeaderCellDef>LastVisitDate</th>
-          <td mat-cell *matCellDef="let element">{{element.LastVisitDate }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{element.lastVisitDate | date: 'dd.MM.yyyy' }}
+          </td>
         </ng-container>
 
         <!-- Weight Column -->
-        <ng-container matColumnDef="Medicines">
+        <ng-container matColumnDef="medicines">
           <th mat-header-cell *matHeaderCellDef>Medicines</th>
-          <td mat-cell *matCellDef="let element">{{element.Medicines}}</td>
+          <td mat-cell *matCellDef="let element">{{element.medicines}}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        aria-label="Select page of patients"
+      >
+      </mat-paginator>
   </div>
 </div>

@@ -4,7 +4,11 @@
       <app-mr-search (onSearchText)="search($event)"> </app-mr-search>
     </div>
     <div class="btn-container">
-      <button class="btn-add-medicine" (click)="addDialog()">
+      <button
+        class="btn-add-medicine"
+        (click)="addDialog()"
+        [disabled]="!isAddActive()"
+      >
         Add Medicine
       </button>
     </div>
@@ -126,10 +130,16 @@
             type="button"
             (click)="edit(element)"
             class="btnfirst"
+            [disabled]="!isAddActive()"
           >
             <mat-icon fontIcon="edit"></mat-icon>
           </button>
-          <button matButton type="button" (click)="delete(element)">
+          <button
+            matButton
+            type="button"
+            (click)="delete(element)"
+            [disabled]="!isAddActive()"
+          >
             <mat-icon fontIcon="delete"></mat-icon>
           </button>
         </td>
@@ -138,11 +148,11 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator
-      [pageSizeOptions]="[5, 10, 20]"
-      showFirstLastButtons
-      aria-label="Select page of medicines"
-    >
-    </mat-paginator>
   </div>
+  <mat-paginator
+    [pageSizeOptions]="[7, 5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of medicines"
+  >
+  </mat-paginator>
 </div>

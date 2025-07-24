@@ -10,6 +10,8 @@ import { MrClinics } from './mr-clinics/mr-clinics';
 import { MrNewPatient } from './mr-new-patient/mr-new-patient';
 import { MrPatientInfo } from './mr-patient-info/mr-patient-info';
 import { mrIsAuthenticateGuard } from './guards/mr-is-authenticate-guard';
+import { mrAddPatientGuard } from './guards/mr-add-patient-guard';
+import { mrPatientInfoGuard } from './guards/mr-patient-info-guard';
 
 export const routes: Routes = [
   {
@@ -52,11 +54,11 @@ export const routes: Routes = [
   {
     path: 'patient',
     component: MrNewPatient,
-    canActivate: [mrIsAuthenticateGuard],
+    canActivate: [mrAddPatientGuard],
   },
   {
-    path: 'patientinfo',
+    path: 'patientinfo/:id',
     component: MrPatientInfo,
-    canActivate: [mrIsAuthenticateGuard],
+    canActivate: [mrPatientInfoGuard],
   },
 ];

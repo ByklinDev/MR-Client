@@ -18,6 +18,7 @@ import { MrEditClinic } from '../mr-edit-clinic/mr-edit-clinic';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort } from '@angular/material/sort';
+import { MrActiveTabService } from '../services/mr-active-tab-service';
 
 @Component({
   selector: 'app-mr-clinics',
@@ -34,6 +35,8 @@ import { MatSort } from '@angular/material/sort';
 export class MrClinics implements AfterViewInit, OnInit {
 
   private readonly clinicService = inject(MrClinicService);
+  private readonly activeTabService = inject(MrActiveTabService);
+
   private _liveAnnouncer = inject(LiveAnnouncer);
 
   dataSource = new MatTableDataSource<MrClinicInterface>();
@@ -77,6 +80,8 @@ export class MrClinics implements AfterViewInit, OnInit {
         console.error('Error fetching clinics:', error);
       },
     });
+
+    this.activeTabService.setActiveTab('clinic');
   }
   readonly dialog = inject(MatDialog);
 

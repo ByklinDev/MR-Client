@@ -14,7 +14,7 @@
 .btnaddpatient {
   height: 55px;
   width: 140px;
-  background-color: #209273;
+  background-color: #1bbfa1;
   color: white;
   font-size: medium;
 }
@@ -23,26 +23,75 @@
   border-radius: 0.25rem;
   border: 0px;
 }
+
 .btnaddpatient:hover {
-  background-color: #177155;
+  background-color: #0d8a73;
   cursor: pointer;
 }
 .btnaddpatient:active {
-  background-color: #209973;
+  background-color: #1bbfa1;
   cursor: pointer;
   -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
   -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
   box-shadow: inset 0px 0px 5px #c1c1c1;
   outline: none;
 }
-
+.btnaddpatient:disabled {
+  background-color: #87a29d;
+  cursor: default;
+}
+a {
+  color: rgb(40, 39, 39);
+}
 table {
   width: 100%;
+  border: 3px solid #4e94bf;
+  border-radius: 5px;
 }
 .table-content {
   width: 100%;
+  min-height: 55vh;
 }
+
+th {
+  text-align: center;
+}
+
+th,
+td {
+  border: 0px solid #4e94bf;
+}
+
+tr:nth-child(even) {
+  background-color: #d6eeee;
+}
+
+.mat-column-patientNumber {
+  width: 32px;
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-dateOfBirth {
+  width: 50px;
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-lastVisitDate {
+  width: 50px;
+  border-right: 2px solid #91bdd9;
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-medicines {
+  padding-right: 24px;
+  text-align: center;
+}
+
 .mat-mdc-header-row {
-  background-color: #417FA6;
+  background-color: #417fa6;
   color: white;
 }

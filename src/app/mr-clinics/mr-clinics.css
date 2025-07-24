@@ -47,6 +47,7 @@ td {
 }
 .table-content {
   width: 100%;
+  min-height: 55vh;
 }
 tr:nth-child(even) {
   background-color: #d6eeee;
@@ -67,6 +68,7 @@ tr:nth-child(even) {
   border-right: 2px solid #91bdd9;
   padding-right: 24px;
   text-align: center;
+  width: 180px;
 }
 .mat-column-city {
   border-right: 2px solid #91bdd9;

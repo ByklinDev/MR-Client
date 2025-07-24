@@ -7,14 +7,29 @@
           <mat-form-field id="patientnumber">
             <mat-label>Patient Number</mat-label>
             <input
+              id="patientNumber"
               matInput
               formControlName="patientNumber"
               type="text"
               required
-              pattern="[0-9]{3}-[0-9]{4}"
               placeholder="Enter patient number"
             />
           </mat-form-field>
+
+          @if (patientNumber?.invalid && patientNumber?.touched ||
+          patientNumber?.dirty) {
+          <div class="alert alert-danger">
+            @if (patientNumber?.hasError('required')){
+            <mat-error> Patient number is required. </mat-error>
+            }@else if (patientNumber?.hasError('invalidFormat')){
+            <mat-error> Invalid Format. </mat-error>
+            }@else if (patientNumber?.hasError('invalidClinic')) {
+            <mat-error> Clinic number does not exists. </mat-error>
+            }@else if(patientNumber?.hasError('patientExists')){
+            <mat-error> Patient number already exists. </mat-error>
+            }
+          </div>
+          }
           <mat-form-field id="dateofbirth">
             <mat-label>Date Of Birth</mat-label>
             <input
@@ -22,14 +37,14 @@
               formControlName="dateOfBirth"
               type="date"
               required
-              placeholder="Enter date of birth"
+              placeholder="Enter date of birth"              
             />
           </mat-form-field>
         </div>
         <div class="male">
           <mat-radio-group aria-label="Select gender" formControlName="gender">
-            <mat-radio-button value="1">Male</mat-radio-button>
-            <mat-radio-button value="2">Female</mat-radio-button>
+            <mat-radio-button value="Male">Male</mat-radio-button>
+            <mat-radio-button value="Female">Female</mat-radio-button>
           </mat-radio-group>
         </div>
         <div>
@@ -49,6 +64,6 @@
     </div>
   </div>
   <div class="image-container">
-    <img src="newpatient.png" alt="doctor" width=400px />
+    <img src="newpatient.png" alt="doctor" width="400px" />
   </div>
 </div>

@@ -1,8 +1,7 @@
 <div class="clinic-container">
   <div class="clinic-header">
     <div>
-      <app-mr-search (onSearchText)="search($event)">
-      </app-mr-search>
+      <app-mr-search (onSearchText)="search($event)"> </app-mr-search>
     </div>
     <div>
       <button class="btnaddclinic" (click)="addDialog()">Add Clinic</button>
@@ -81,11 +80,11 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator
-      [pageSizeOptions]="[5, 10, 20]"
-      showFirstLastButtons
-      aria-label="Select page of clinics"
-    >
-    </mat-paginator>
   </div>
+  <mat-paginator
+    [pageSizeOptions]="[7, 5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of clinics"
+  >
+  </mat-paginator>
 </div>

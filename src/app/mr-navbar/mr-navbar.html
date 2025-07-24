@@ -1,88 +1,61 @@
 <div class="mr-navbar">
   <div class="menuitem">
-    <button
-      routerLink=""
-      [class.active]="isActiveTab('home')"
-      (click)="setActiveTab('home')"
-    >
-      Home
-    </button>
+    <button routerLink="" [class.active]="isActiveTab('home')">Home</button>
   </div>
   <div
     class="menuitem"
-    [class.hidelogin]="!isClinicsActive()"
-    [class.showlogin]="isClinicsActive()"
+    [class.hidetab]="!isClinicsActive()"
+    [class.showtab]="isClinicsActive()"
   >
-    <button
-      routerLink="clinics"
-      [class.active]="isActiveTab('clinics')"
-      (click)="setActiveTab('clinics')"
-    >
+    <button routerLink="clinics" [class.active]="isActiveTab('clinic')">
       Clinics
     </button>
   </div>
 
   <div
     class="menuitem"
-    [class.hidelogin]="!isMedicinesActive()"
-    [class.showlogin]="isMedicinesActive()"
+    [class.hidetab]="!isMedicinesActive()"
+    [class.showtab]="isMedicinesActive()"
   >
-    <button
-      routerLink="medicines"
-      [class.active]="isActiveTab('medicines')"
-      (click)="setActiveTab('medicines')"
-    >
+    <button routerLink="medicines" [class.active]="isActiveTab('medicine')">
       Medicines
     </button>
   </div>
   <div
     class="menuitem"
-    [class.hidelogin]="!isSupplyActive()"
-    [class.showlogin]="isSupplyActive()"
+    [class.hidetab]="!isSupplyActive()"
+    [class.showtab]="isSupplyActive()"
   >
-    <button
-      routerLink="supply"
-      [class.active]="isActiveTab('supply')"
-      (click)="setActiveTab('supply')"
-    >
+    <button routerLink="supply" [class.active]="isActiveTab('supply')">
       Supply
     </button>
   </div>
   <div
     class="menuitem"
-    [class.hidelogin]="!isResearchActive()"
-    [class.showlogin]="isResearchActive()"
+    [class.hidetab]="!isResearchActive()"
+    [class.showtab]="isResearchActive()"
   >
-    <button
-      routerLink="research"
-      [class.active]="isActiveTab('research')"
-      (click)="setActiveTab('research')"
-    >
+    <button routerLink="research" [class.active]="isActiveTab('research')">
       Research
     </button>
   </div>
   <div
     class="menuitem"
-    [class.hidelogin]="!isNewPatientActive()"
-    [class.showlogin]="isNewPatientActive()"
+    [class.hidetab]="true"
+    [class.showtab]="false"
   >
-    <button
-      routerLink="patient"
-      [class.active]="isActiveTab('patient')"
-      (click)="setActiveTab('patient')"
-    >
+    <button routerLink="patient" [class.active]="isActiveTab('newpatient')">
       New Patient
     </button>
   </div>
   <div
     class="menuitem"
-    [class.hidelogin]="!isPatientInfoActive()"
-    [class.showlogin]="isPatientInfoActive()"
+    [class.hidetab]="true"
+    [class.showtab]="false"
   >
     <button
       routerLink="patientinfo"
       [class.active]="isActiveTab('patientinfo')"
-      (click)="setActiveTab('patientinfo')"
     >
       Patient Info
     </button>
@@ -91,28 +64,20 @@
   <div
     id="signup"
     class="menuitem"
-    [class.hidelogin]="hideLogin()"
-    [class.showlogin]="showLogin()"
+    [class.hidetab]="hideLogin()"
+    [class.showtab]="showLogin()"
   >
-    <button
-      routerLink="signup"
-      [class.active]="isActiveTab('signup')"
-      (click)="setActiveTab('signup')"
-    >
+    <button routerLink="signup" [class.active]="isActiveTab('signup')">
       Sign Up
     </button>
   </div>
   <div
     id="login"
     class="menuitem"
-    [class.hidelogin]="hideLogin()"
-    [class.showlogin]="showLogin()"
+    [class.hidetab]="hideLogin()"
+    [class.showtab]="showLogin()"
   >
-    <button
-      routerLink="login"
-      [class.active]="isActiveTab('login')"
-      (click)="setActiveTab('login')"
-    >
+    <button routerLink="login" [class.active]="isActiveTab('login')">
       Log In
     </button>
   </div>

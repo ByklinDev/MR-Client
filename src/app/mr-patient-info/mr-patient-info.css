@@ -3,8 +3,8 @@
   font-size: 24px;
   font-weight: bold;
   color: #326a8c;
-  padding-top: 30px;
   margin-bottom: 10px;
+  padding-top: 10px;
 }
 .pairs-container {
   display: flex;
@@ -40,6 +40,7 @@
   background-color: #faf9fd;
   padding: 0 16px;
   min-height: 75svh;
+  margin-top: 0;
 }
 
 .actions-container {
@@ -52,6 +53,10 @@
   height: 55px;
   width: 140px;
   border-radius: 0.25rem;
+}
+.tabcaption {
+  color: #326a8c;
+  font-size: 20pt;
 }
 
 #performvisitbtn {
@@ -75,6 +80,12 @@
   box-shadow: inset 0px 0px 5px #c1c1c1;
   outline: none;
 }
+
+#performvisitbtn:disabled {
+  background-color: #87a29d;
+  cursor: default;
+}
+
 #endparty {
   background-color: #c64b4b;
   color: white;
@@ -93,13 +104,19 @@
   box-shadow: inset 0px 0px 5px #c1c1c1;
   outline: none;
 }
-
+#endparty:disabled {
+  background-color: #8c6974;
+  cursor: default;
+}
 table {
   width: 100%;
   border: 3px solid #4e94bf;
   border-radius: 5px;
 }
-
+p{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
 th {
   text-align: center;
 }
@@ -127,6 +144,7 @@ tr:nth-child(even) {
 .mat-column-Number {
   border-right: 2px solid #91bdd9;
   padding-right: 24px;
+  width: 100px;
   text-align: center;
 }
 .mat-column-Date {

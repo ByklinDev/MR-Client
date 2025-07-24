@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MrAuthService } from '../services/mr-auth-service';
+import { MrActiveTabService } from '../services/mr-active-tab-service';
 
 @Component({
   selector: 'app-mr-log-in',
@@ -30,6 +31,8 @@ import { MrAuthService } from '../services/mr-auth-service';
 })
 export class MrLogIn implements OnInit {
   private readonly authService = inject(MrAuthService);
+  private readonly activeTabService = inject(MrActiveTabService);
+
   loginForm = new FormGroup({
     emailLogin: new FormControl<string>('', [
       Validators.required,
@@ -56,5 +59,6 @@ export class MrLogIn implements OnInit {
       rememberLogin: localStorage.getItem('RememberMe') === 'true' || false,
     });
     this.loginError = this.authService.loginError;
+    this.activeTabService.setActiveTab('login');
   }
 }

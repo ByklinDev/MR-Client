@@ -4,7 +4,6 @@ import {
   inject,
   model,
   OnInit,
-  signal,
   ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +11,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MrClinicInterface } from '../interfaces/mr-clinic-interface';
-import { MrClinicStockMedicineInterface } from '../mr-clinic-stock-medicine-interface';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MrClinicService } from '../services/mr-clinic-service';
 import { MrMedicineInterface } from '../interfaces/mr-medicine-interface';
@@ -25,6 +23,7 @@ import { MrAuthService } from '../services/mr-auth-service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MrActiveTabService } from '../services/mr-active-tab-service';
 
 @Component({
   selector: 'app-mr-supply',
@@ -45,6 +44,8 @@ export class MrSupply implements AfterViewInit, OnInit {
   private readonly medicineService = inject(MrMedicineService);
   private readonly supplyService = inject(MrSupplyService);
   private readonly authService = inject(MrAuthService);
+  private readonly activeTabService = inject(MrActiveTabService);
+
   private readonly userId = this.authService.getUserId();
   private _liveAnnouncer = inject(LiveAnnouncer);
 
@@ -147,6 +148,8 @@ export class MrSupply implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
+    this.activeTabService.setActiveTab('supply');
+
     this.clinicsService.getAllClinics().subscribe({
       next: (data) => {
         this.clinics = data as MrClinicInterface[];

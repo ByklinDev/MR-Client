@@ -92,6 +92,10 @@ export class MrAuthService {
     this.isRoleActive('Admin') || this.isRoleActive('Researcher')
   );
 
+  isRolesActive = signal<boolean>(
+    this.isRoleActive('Admin') || this.isRoleActive('Sponsor')
+  );
+
   logout() {
     localStorage.removeItem(this.tokenKey);
     this.userService.imageSrc.set('user_icon.png'); // Reset user image
@@ -196,6 +200,7 @@ export class MrAuthService {
     this.isPatientInfoActive.set(false);
     this.isResearchActive.set(false);
     this.isSupplyActive.set(false);
+    this.isRolesActive.set(false);
 
     const token = this.getAccessToken();
     if (token) {
@@ -210,9 +215,11 @@ export class MrAuthService {
           this.isResearchActive.set(true);
           this.isNewPatientActive.set(true);
           this.isPatientInfoActive.set(true);
+          this.isRolesActive.set(true);
         }
         if (decodedToken.role === 'Sponsor') {
           this.isClinicsActive.set(true);
+          this.isRolesActive.set(true);
         }
         if (
           decodedToken.role === 'Sponsor' ||

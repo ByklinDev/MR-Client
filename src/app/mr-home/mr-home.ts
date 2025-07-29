@@ -9,8 +9,8 @@ import { MrActiveTabService } from '../services/mr-active-tab-service';
   styleUrl: './mr-home.css',
 })
 export class MrHome implements OnInit {
-  private readonly acttiveTabService = inject(MrActiveTabService);
+  private readonly activeTabService = inject(MrActiveTabService);
   ngOnInit(): void {
-    this.acttiveTabService.setActiveTab('home');
+    this.activeTabService.setActiveTab('home');
   }
 }

@@ -52,7 +52,7 @@
 table {
   width: 100%;
   border: 3px solid #4e94bf;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 th {
@@ -125,4 +125,7 @@ tr:nth-child(even) {
 }
 .btnfirst {
   margin-right: 10px;
+}
+td > button {
+  border: #417fa6 2px solid;
 }

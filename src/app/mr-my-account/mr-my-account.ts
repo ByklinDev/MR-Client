@@ -46,6 +46,8 @@ export class MrMyAccount implements OnInit {
   userSurname = signal<string>('');
   userId = signal<number>(0);
 
+  errorMessage = signal('');
+  
   userBarName = computed(() => this.userFirstName() + ' ' + this.userSurname());
 
   removeAccount() {
@@ -87,6 +89,9 @@ export class MrMyAccount implements OnInit {
           this.authService.userInitials.set(response.initials);
           this.router.navigate(['/']);
         },
+        error: (err) => {
+          this.errorMessage.set(err.message);
+        }
       });
     }
   }
@@ -100,7 +105,7 @@ export class MrMyAccount implements OnInit {
 
   ngOnInit() {
     this.activeTabService.setActiveTab('myaccount');
-
+    this.errorMessage.set('');
     this.myAccountForm.patchValue({
       firstname: this.authService.userFirst(),
       lastname: this.authService.userLast(),

@@ -81,10 +81,35 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
-  <mat-paginator
+<!--  <mat-paginator
     [pageSizeOptions]="[7, 5, 10, 20]"
     showFirstLastButtons
     aria-label="Select page of clinics"
   >
   </mat-paginator>
+ -->
+  <div>
+    <div>
+     <label for="pageSize">Items per page</label>
+        <select id="pageSize" [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+          @for (size of pageSizeOptions; track size) {
+          <option [value]="size"
+            >{{size}}</option
+          >
+          }
+        </select>
+    </div>
+    <div class="pagination-controls">
+      <button (click)="previousPage()" [disabled]="currentPage() === 1">
+        Previous
+      </button>
+      <span>Page {{ currentPage()}} of {{ totalPages() }}</span>
+      <button
+        (click)="nextPage()"
+        [disabled]="currentPage() >= totalPages()"
+      >
+        Next
+      </button>
+    </div>
+  </div>
 </div>

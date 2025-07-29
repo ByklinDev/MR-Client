@@ -67,7 +67,6 @@ export class MrMedicines implements AfterViewInit, OnInit {
   isAddActive = signal<boolean>(false);
 
   search(text: string) {
-    console.log('Search text:', text);
     this.medicineService.getMedicines(text).subscribe({
       next: (data) => {
         this.dataSource.data = data as MrMedicineInterface[];

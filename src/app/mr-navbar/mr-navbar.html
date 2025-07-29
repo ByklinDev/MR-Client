@@ -39,20 +39,12 @@
       Research
     </button>
   </div>
-  <div
-    class="menuitem"
-    [class.hidetab]="true"
-    [class.showtab]="false"
-  >
+  <div class="menuitem" [class.hidetab]="true" [class.showtab]="false">
     <button routerLink="patient" [class.active]="isActiveTab('newpatient')">
       New Patient
     </button>
   </div>
-  <div
-    class="menuitem"
-    [class.hidetab]="true"
-    [class.showtab]="false"
-  >
+  <div class="menuitem" [class.hidetab]="true" [class.showtab]="false">
     <button
       routerLink="patientinfo"
       [class.active]="isActiveTab('patientinfo')"
@@ -79,6 +71,16 @@
   >
     <button routerLink="login" [class.active]="isActiveTab('login')">
       Log In
+    </button>
+  </div>
+  <div
+    id="roles"
+    class="menuitem"
+    [class.hidetab]="!isRolesActive()"
+    [class.showtab]="isRolesActive()"
+  >
+    <button routerLink="roles" [class.active]="isActiveTab('roles')">
+      Roles
     </button>
   </div>
 </div>

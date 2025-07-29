@@ -30,6 +30,7 @@ export class MrNavbar implements OnInit {
   isResearchActive = signal<boolean>(this.authService.isResearchActive());
   isNewPatientActive = signal<boolean>(this.authService.isNewPatientActive());
   isPatientInfoActive = signal<boolean>(this.authService.isPatientInfoActive());
+  isRolesActive = signal<boolean>(this.authService.isRolesActive());
 
   ngOnInit() {
     this.showLogin = this.authService.showLogin;
@@ -43,5 +44,6 @@ export class MrNavbar implements OnInit {
     this.isResearchActive = this.authService.isResearchActive;
     this.isNewPatientActive = this.authService.isNewPatientActive;
     this.isPatientInfoActive = this.authService.isPatientInfoActive;
+    this.isRolesActive = this.authService.isRolesActive;
   }
 }

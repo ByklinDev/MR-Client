@@ -1,9 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { MrUserUpdateInterface } from '../interfaces/mr-user-update-interface';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
-import { MrAuthService } from './mr-auth-service';
+import { catchError, throwError } from 'rxjs';
+import { MrUserRoleInterface } from '../interfaces/mr-user-role-interface';
+import { json } from 'stream/consumers';
+import { MrEditUserRoleInterface } from '../interfaces/mr-edit-user-role-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -80,7 +83,8 @@ export class MrUserService {
     return this.httpClient
       .get(`${environment.apiUrl}/users/${userId}/photo`, {
         responseType: 'text',
-      });
+      })
+      .pipe(catchError(this.handleError));
   }
 
   updateUser(updateForm: MrUserUpdateInterface) {
@@ -89,6 +93,47 @@ export class MrUserService {
         `${environment.apiUrl}/users/${updateForm.id}`,
         updateForm,
         { responseType: 'json' }
-      );
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  getUsersRoles(text?: string) {
+    if (!text){
+      text = '';
+    }
+    return this.httpClient
+      .get<MrUserRoleInterface[]>(`${environment.apiUrl}/users/roles`, {
+        responseType: 'json',
+        observe: 'response',
+        params: { SearchTerm: text },
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteUserRole(userRole: MrEditUserRoleInterface) {
+    const userId = userRole.userId;
+    const roleId = userRole.roleId;
+    return this.httpClient
+      .delete<void>(`${environment.apiUrl}/users/${userId}/roles/${roleId}`, {
+        responseType: 'json',
+        observe: 'response',
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  addUserRole(userRole: MrEditUserRoleInterface) {
+    const userId = userRole.userId;
+    const roleId = userRole.roleId;
+    return this.httpClient
+      .post<void>(`${environment.apiUrl}/users/${userId}/roles/${roleId}`, {
+        responseType: 'json',
+        observe: 'response',
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    // Handle the error here
+    return throwError(() => new Error(`${error.error.detail}`));
   }
 }

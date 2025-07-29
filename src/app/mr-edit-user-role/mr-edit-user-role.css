@@ -1,0 +1,29 @@
+.add-container {
+  display: flex;
+}
+
+.first-col > mat-form-field {
+  width: 300px;
+}
+.second-col > mat-form-field {
+  width: 320px;
+}
+mat-dialog-actions > .mainbtn {
+  background-color: #326a8c;
+  color: white;
+  border-radius: 0.25rem;
+  width: 130px;
+  height: 50px;
+}
+
+mat-dialog-actions > .cancelbtn {
+  background-color: #f24141;
+  color: white;
+  border-radius: 0.25rem;
+  width: 130px;
+  height: 50px;
+}
+h2 {
+  text-align: center;
+  color: #326a8c;
+}

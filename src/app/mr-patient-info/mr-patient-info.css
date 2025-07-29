@@ -156,3 +156,8 @@ tr:nth-child(even) {
   padding-right: 24px;
   text-align: center;
 }
+.errortext {
+  color: #ea5959;
+  padding-top: 15px;
+  text-align: center;
+}

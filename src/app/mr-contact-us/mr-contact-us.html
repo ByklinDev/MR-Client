@@ -4,6 +4,8 @@
     <p>775 Westminster Avenue APT D5 Brooklin, NY, 11230</p>
     <p>medicalResearch&#64;lab.com</p>
     <p>+1(416)661-5775</p>
+    <p class="errortext">{{errorMessageSend()}}</p>
+    <p>{{successMessage()}}</p>
   </div>
   <div class="contactusform">
     <form [formGroup]="contactForm" (ngSubmit)="sendEmail()">

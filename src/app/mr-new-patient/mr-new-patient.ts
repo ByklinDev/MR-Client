@@ -1,11 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { NgIf } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -17,8 +16,8 @@ import { MrClinicInterface } from '../interfaces/mr-clinic-interface';
 import { MrPatientInterface } from '../interfaces/mr-patient-interface';
 import { MrAddPatientInterface } from '../interfaces/mr-add-patient-interface';
 import { MrPatientGenderEnum } from '../enums/mr-patient-gender-enum';
-import { M } from '@angular/cdk/keycodes';
 import { MrActiveTabService } from '../services/mr-active-tab-service';
+import { sign } from 'crypto';
 
 @Component({
   selector: 'app-mr-new-patient',
@@ -40,6 +39,7 @@ export class MrNewPatient implements OnInit {
 
   clinics: MrClinicInterface[] = [];
   patients: MrPatientInterface[] = [];
+  errorMessage = signal('');
 
   patientForm = new FormGroup({
     patientNumber: new FormControl(
@@ -59,6 +59,7 @@ export class MrNewPatient implements OnInit {
   }
 
   addPatient() {
+    this.errorMessage.set('');
     if (this.patientForm.valid) {
       const sex = this.patientForm.value.gender === 'Male' ? 1 : 2;
 
@@ -76,7 +77,7 @@ export class MrNewPatient implements OnInit {
           });
         },
         error: (error) => {
-          console.error('Error adding patient:', error);
+          this.errorMessage.set(error.message);
         },
       });
     }
@@ -84,9 +85,9 @@ export class MrNewPatient implements OnInit {
 
   ngOnInit() {
     this.activeTabService.setActiveTab('newpatient');
-
+    this.errorMessage.set('');
     this.clinicsService.getAllClinics().subscribe((clinics) => {
-      this.clinics = clinics;
+      this.clinics = clinics.body ?? [];
     });
 
     this.patientsService.getAllPatients().subscribe((patients) => {

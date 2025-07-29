@@ -22,6 +22,7 @@ import { MrAuthService } from '../services/mr-auth-service';
 import { MrActiveTabService } from '../services/mr-active-tab-service';
 import { MrUpdatePatientInterface } from '../interfaces/mr-update-patient-interface';
 import { MrPatientStatusEnum } from '../enums/mr-patient-status-enum';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-mr-patient-info',
@@ -57,8 +58,8 @@ export class MrPatientInfo implements AfterViewInit, OnInit {
   userId = signal<number>(0);
 
   tempMedicineId = signal<number>(0);
-
   isDisabled = signal<boolean>(false);
+  errorMessage = signal('');
 
   @ViewChild(MatPaginator)
   paginator: MatPaginator = new MatPaginator();
@@ -71,6 +72,9 @@ export class MrPatientInfo implements AfterViewInit, OnInit {
       next: (data) => {
         this.dataSource.data = data as MrPatientVisitInterface[];
       },
+      error: (err) => {
+        this.errorMessage.set(err.message);
+      },
     });
   }
 
@@ -82,6 +86,8 @@ export class MrPatientInfo implements AfterViewInit, OnInit {
   }
 
   addVisit() {
+    console.log('Start visiting...');
+    this.errorMessage.set('');
     this.visitService
       .getRandomMedicineStock(this.patientClinicId(), this.medicineTypeId())
       .subscribe({
@@ -108,12 +114,18 @@ export class MrPatientInfo implements AfterViewInit, OnInit {
                         .substring(0, 10)
                     );
                   },
+                  error: (err) => {
+                    this.errorMessage.set(err.message);
+                  },
                 });
             },
             error: (err) => {
-              console.log('Error', err);
+              this.errorMessage.set(err.message);
             },
           });
+        },
+        error: (err) => {
+          this.errorMessage.set(err.message);
         },
       });
   }
@@ -132,6 +144,9 @@ export class MrPatientInfo implements AfterViewInit, OnInit {
         );
         this.isDisabled.set(this.isStatusFinished());
       },
+      error: (err) => {
+        this.errorMessage.set(err.message);
+      },
     });
   }
 
@@ -140,6 +155,7 @@ export class MrPatientInfo implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
+    this.errorMessage.set('');
     this.activeTabService.setActiveTab('patientinfo');
     this.patientId.set(this.route.snapshot.paramMap.get('id') ?? '01');
     this.userId = this.authService.userId;
@@ -164,6 +180,9 @@ export class MrPatientInfo implements AfterViewInit, OnInit {
           );
         }
       },
+      error: (err) => {
+        this.errorMessage.set(err.message);
+      },
     });
 
     if (this.patientMedicineType().length === 0) {
@@ -171,6 +190,9 @@ export class MrPatientInfo implements AfterViewInit, OnInit {
         next: (data) => {
           this.medicineTypeId.set(data.id);
           this.patientMedicineType.set(data.name);
+        },
+        error: (err) => {
+          this.errorMessage.set(err.message);
         },
       });
     }
@@ -187,8 +209,14 @@ export class MrPatientInfo implements AfterViewInit, OnInit {
               this.medicineTypeId.set(response.medicineTypeId);
               this.patientMedicineType.set(response.medicineType.name);
             },
+            error: (err) => {
+              this.errorMessage.set(err.message);
+            },
           });
         }
+      },
+      error: (err) => {
+        this.errorMessage.set(err.message);
       },
     });
   }

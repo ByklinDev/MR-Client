@@ -3,7 +3,7 @@ import { CanActivateFn } from '@angular/router';
 
 import { mrAddPatientGuard } from './mr-add-patient-guard';
 
-describe('mrAddPatienGuard', () => {
+describe('mrAddPatientGuard', () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>
     TestBed.runInInjectionContext(() => mrAddPatientGuard(...guardParameters));
 

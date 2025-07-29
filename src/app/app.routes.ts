@@ -12,6 +12,12 @@ import { MrPatientInfo } from './mr-patient-info/mr-patient-info';
 import { mrIsAuthenticateGuard } from './guards/mr-is-authenticate-guard';
 import { mrAddPatientGuard } from './guards/mr-add-patient-guard';
 import { mrPatientInfoGuard } from './guards/mr-patient-info-guard';
+import { mrClinicsGuard } from './guards/mr-clinics-guard';
+import { mrSupplyGuard } from './guards/mr-supply-guard';
+import { mrMedicinesGuard } from './guards/mr-medicines-guard';
+import { mrResearchGuard } from './guards/mr-research-guard';
+import { MrRoles } from './mr-roles/mr-roles';
+import { mrRolesGuard } from './guards/mr-roles-guard';
 
 export const routes: Routes = [
   {
@@ -34,22 +40,22 @@ export const routes: Routes = [
   {
     path: 'medicines',
     component: MrMedicines,
-    canActivate: [mrIsAuthenticateGuard],
+    canActivate: [mrMedicinesGuard],
   },
   {
     path: 'supply',
     component: MrSupply,
-    canActivate: [mrIsAuthenticateGuard],
+    canActivate: [mrSupplyGuard],
   },
   {
     path: 'research',
     component: MrResearch,
-    canActivate: [mrIsAuthenticateGuard],
+    canActivate: [mrResearchGuard],
   },
   {
     path: 'clinics',
     component: MrClinics,
-    canActivate: [mrIsAuthenticateGuard],
+    canActivate: [mrClinicsGuard],
   },
   {
     path: 'patient',
@@ -60,5 +66,10 @@ export const routes: Routes = [
     path: 'patientinfo/:id',
     component: MrPatientInfo,
     canActivate: [mrPatientInfoGuard],
+  },
+  {
+    path: 'roles',
+    component: MrRoles,
+    canActivate: [mrRolesGuard],
   },
 ];

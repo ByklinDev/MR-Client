@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MrSignUpService } from '../services/mr-sign-up-service';
 import { MrSignUpInterface } from '../interfaces/mr-sign-up-interface';
 import { MrActiveTabService } from '../services/mr-active-tab-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mr-sign-up',
@@ -20,9 +21,10 @@ import { MrActiveTabService } from '../services/mr-active-tab-service';
   templateUrl: './mr-sign-up.html',
   styleUrl: './mr-sign-up.css',
 })
-export class MrSignUp implements OnInit{
+export class MrSignUp implements OnInit {
   private readonly signUpService = inject(MrSignUpService);
   private readonly activeTabService = inject(MrActiveTabService);
+  private readonly router = inject(Router);
 
   signupForm = new FormGroup({
     firstname: new FormControl('', [Validators.required]),
@@ -36,6 +38,7 @@ export class MrSignUp implements OnInit{
     confirmpassword: new FormControl('', [Validators.required]),
   });
 
+  errorMessage = signal('');
   signupUser() {
     // Implement sign-up logic here
     if (this.signupForm.valid) {
@@ -58,11 +61,19 @@ export class MrSignUp implements OnInit{
       };
 
       // Here you would typically call a service to handle the sign-up
-      this.signUpService.signup(req);
+      this.signUpService.signup(req).subscribe({
+        next: (response) => {
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          this.errorMessage.set(err.message);
+        },
+      });
     }
   }
 
   ngOnInit(): void {
     this.activeTabService.setActiveTab('signup');
+    this.errorMessage.set('');
   }
 }

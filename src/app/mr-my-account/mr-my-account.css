@@ -142,3 +142,10 @@ img {
   opacity: 1;
   height: 50%;
 }
+
+.errortext {
+  color: #ea5959;
+  padding-top: 15px;
+  text-align: center;
+}
+

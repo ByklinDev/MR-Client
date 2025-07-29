@@ -12,7 +12,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MrClinicInterface } from '../interfaces/mr-clinic-interface';
-import { MrClinicStockMedicineInterface } from '../mr-clinic-stock-medicine-interface';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MrClinicService } from '../services/mr-clinic-service';
 import { MrMedicineInterface } from '../interfaces/mr-medicine-interface';
@@ -25,6 +24,7 @@ import { MrAuthService } from '../services/mr-auth-service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MrActiveTabService } from '../services/mr-active-tab-service';
 
 @Component({
   selector: 'app-mr-supply',
@@ -45,6 +45,8 @@ export class MrSupply implements AfterViewInit, OnInit {
   private readonly medicineService = inject(MrMedicineService);
   private readonly supplyService = inject(MrSupplyService);
   private readonly authService = inject(MrAuthService);
+  private readonly activeTabService = inject(MrActiveTabService);
+
   private readonly userId = this.authService.getUserId();
   private _liveAnnouncer = inject(LiveAnnouncer);
 
@@ -52,6 +54,7 @@ export class MrSupply implements AfterViewInit, OnInit {
   medicineId = model<number>(0);
   amount = model<number>(0);
 
+  errorMessage = signal('');
   clinics: MrClinicInterface[] = [];
   medicines: MrMedicineInterface[] = [];
 
@@ -90,8 +93,8 @@ export class MrSupply implements AfterViewInit, OnInit {
       next: (data) => {
         this.getSuppliesByUserId(this.userId);
       },
-      error: (error) => {
-        console.error('Error adding supply:', error);
+      error: (err) => {
+        this.errorMessage.set(err.message);
       },
     });
   }
@@ -103,12 +106,14 @@ export class MrSupply implements AfterViewInit, OnInit {
         next: (data) => {
           this.getSuppliesByUserId(this.userId);
         },
+        error: (err) => {
+          this.errorMessage.set(err.message);
+        },
       });
   }
 
   onKeyClinic(event: any): void {
     const eventValue = event.target.value.toLowerCase();
-    console.log('Search text:', eventValue);
     if (eventValue) {
       this.filteredClinics = this.clinics.filter((clinic) =>
         clinic.name.toLowerCase().includes(eventValue.toLowerCase())
@@ -120,7 +125,6 @@ export class MrSupply implements AfterViewInit, OnInit {
 
   onKeyMed(event: any): void {
     const eventValue = event.target.value.toLowerCase();
-    console.log('Search text:', eventValue);
     if (eventValue) {
       this.filteredMedicines = this.medicines.filter((medicine) =>
         medicine.description.toLowerCase().includes(eventValue.toLowerCase())
@@ -133,11 +137,10 @@ export class MrSupply implements AfterViewInit, OnInit {
   delete(medicine: MrSupplyInterface) {
     this.supplyService.deleteSupply(medicine.id).subscribe({
       next: () => {
-        console.log('Supply deleted successfully');
         this.getSuppliesByUserId(this.userId);
       },
-      error: (error) => {
-        console.error('Error deleting supply:', error);
+      error: (err) => {
+        this.errorMessage.set(err.message);
       },
     });
   }
@@ -147,13 +150,16 @@ export class MrSupply implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
+    this.errorMessage.set('');
+    this.activeTabService.setActiveTab('supply');
+
     this.clinicsService.getAllClinics().subscribe({
       next: (data) => {
-        this.clinics = data as MrClinicInterface[];
+        this.clinics = data.body as MrClinicInterface[];
         this.filteredClinics = this.clinics;
       },
-      error: (error) => {
-        console.error('Error fetching clinics:', error);
+      error: (err) => {
+        this.errorMessage.set(err.message);
       },
     });
 
@@ -165,8 +171,8 @@ export class MrSupply implements AfterViewInit, OnInit {
         );
         this.filteredMedicines = this.medicines;
       },
-      error: (error) => {
-        console.error('Error fetching medicines:', error);
+      error: (err) => {
+        this.errorMessage.set(err.message);
       },
     });
 
@@ -178,8 +184,8 @@ export class MrSupply implements AfterViewInit, OnInit {
       next: (data) => {
         this.dataSource.data = data as MrSupplyInterface[];
       },
-      error: (error) => {
-        console.error('Error fetching supplies:', error);
+      error: (err) => {
+        this.errorMessage.set(err.message); 
       },
     });
   }

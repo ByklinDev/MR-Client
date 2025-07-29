@@ -15,10 +15,10 @@
   justify-content: center;
   text-align: center;
 }
-.hidelogin{
+.hidetab{
   display: none;
 }
-.showlogin{
+.showtab{
   display: block;
 }
 

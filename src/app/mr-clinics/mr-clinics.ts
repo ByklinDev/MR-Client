@@ -3,6 +3,7 @@ import {
   Component,
   inject,
   OnInit,
+  signal,
   ViewChild,
 } from '@angular/core';
 import { MrSearch } from '../mr-search/mr-search';
@@ -18,6 +19,11 @@ import { MrEditClinic } from '../mr-edit-clinic/mr-edit-clinic';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort } from '@angular/material/sort';
+import { MrActiveTabService } from '../services/mr-active-tab-service';
+import { MrPaginatorInterface } from '../interfaces/mr-paginator-interface';
+import { sign } from 'crypto';
+import { MrQueryInterface } from '../interfaces/mr-query-interface';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-mr-clinics',
@@ -27,19 +33,32 @@ import { MatSort } from '@angular/material/sort';
     MatTableModule,
     MatIconModule,
     MatSortModule,
+    FormsModule,
   ],
   templateUrl: './mr-clinics.html',
   styleUrl: './mr-clinics.css',
 })
 export class MrClinics implements AfterViewInit, OnInit {
-
   private readonly clinicService = inject(MrClinicService);
+  private readonly activeTabService = inject(MrActiveTabService);
+
   private _liveAnnouncer = inject(LiveAnnouncer);
 
   dataSource = new MatTableDataSource<MrClinicInterface>();
 
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator = new MatPaginator();
+  totalPages = signal(0);
+  currentPage = signal(1);
+  pageSize = signal(5);
+  totalCount = signal(0);
+  hasNext = signal<boolean>(false);
+  hasPrevious = signal<boolean>(false);
+  
+  isAscending = signal<boolean>(false);
+  searchTerm = signal('');
+  sortColumn = signal('');
+
+//  @ViewChild(MatPaginator)
+//  paginator: MatPaginator = new MatPaginator();
   displayedColumns: string[] = [
     'id',
     'name',
@@ -53,15 +72,38 @@ export class MrClinics implements AfterViewInit, OnInit {
   @ViewChild(MatSort)
   sort: MatSort = new MatSort();
 
+  pageSizeOptions: number[] = [5, 7, 8, 10];
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+  //  this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
   getClinics() {
-    this.clinicService.getAllClinics().subscribe({
+    const query: MrQueryInterface = {
+      take: this.pageSize(),
+      skip: this.currentPage(),
+      isAscending: this.isAscending(),
+      searchTerm: this.searchTerm(),
+      sortColumn: this.sortColumn(),
+    };
+    this.clinicService.getAllClinics(query).subscribe({
       next: (data) => {
-        this.dataSource.data = data as MrClinicInterface[];
+        this.dataSource.data = data.body as MrClinicInterface[];
+        const xpaginator = data.headers.get('X-Pagination');
+        if (xpaginator) {
+          const paginator = this.convertStringToJson(xpaginator);
+          if (paginator !== undefined) {
+            this.totalCount.set(paginator.TotalCount);
+            this.pageSize.set(paginator.PageSize);
+            this.currentPage.set(paginator.CurrentPage);
+            this.hasNext.set(paginator.HasNext);
+            this.hasPrevious.set(paginator.HasPrevious);
+            this.totalPages.set(paginator.TotalPages);
+          }
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching clinics:', err);
       },
     });
   }
@@ -69,14 +111,9 @@ export class MrClinics implements AfterViewInit, OnInit {
     this.editDialog(clinic);
   }
   ngOnInit(): void {
-    this.clinicService.getAllClinics().subscribe({
-      next: (data) => {
-        this.dataSource.data = data as MrClinicInterface[];
-      },
-      error: (error) => {
-        console.error('Error fetching clinics:', error);
-      },
-    });
+    this.getClinics();
+
+    this.activeTabService.setActiveTab('clinic');
   }
   readonly dialog = inject(MatDialog);
 
@@ -121,15 +158,46 @@ export class MrClinics implements AfterViewInit, OnInit {
     }
   }
 
-  
   search(text: string) {
     this.clinicService.getClinics(text).subscribe({
       next: (data) => {
-        this.dataSource.data = data as MrClinicInterface[];
+        this.dataSource.data = data.body as MrClinicInterface[];
       },
       error: (error) => {
         console.error('Error fetching clinics:', error);
       },
     });
   }
+
+  convertStringToJson(jsonString: string): MrPaginatorInterface | undefined {
+    try {
+      return JSON.parse(jsonString) as MrPaginatorInterface;
+    } catch (error) {
+      console.error('Invalid JSON string:', error);
+      return undefined;
+    }
+  }
+
+
+
+  nextPage() {
+    if (this.currentPage() <= this.totalPages() - 1) {
+      this.currentPage.set(this.currentPage() + 1 );
+      this.getClinics();
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage() > 1) {
+      this.currentPage.set(this.currentPage() - 1);
+      this.getClinics();
+    }
+  }
+
+
+   onPageSizeChange() {
+    this.currentPage.set(1); // Reset to the first page
+    this.getClinics();
+  }
+
 }

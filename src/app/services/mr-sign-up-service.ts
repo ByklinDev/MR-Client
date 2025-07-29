@@ -1,16 +1,16 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MrSignUpInterface } from '../interfaces/mr-sign-up-interface';
 import { environment } from '../../environments/environment';
 import { MrSignUpResponseInterface } from '../interfaces/mr-sign-up-response-interface';
+import { catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MrSignUpService {
   private readonly httpClient = inject(HttpClient);
-  private readonly router = inject(Router);
 
   constructor() {}
 
@@ -21,13 +21,11 @@ export class MrSignUpService {
         signupForm,
         { responseType: 'json' }
       )
-      .subscribe({
-        next: (response) => {
-          this.router.navigate(['/login']);
-        },
-        error: (error) => {
-          console.error('Sign up failed:', error);
-        },
-      });
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    // Handle the error here
+    return throwError(() => new Error(`${error.error.detail}`));
   }
 }

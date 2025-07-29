@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterLink } from '@angular/router';
 import { MrAuthService } from '../services/mr-auth-service';
+import { MrActiveTabService } from '../services/mr-active-tab-service';
 
 @Component({
   selector: 'app-mr-navbar',
@@ -11,17 +12,16 @@ import { MrAuthService } from '../services/mr-auth-service';
 })
 export class MrNavbar implements OnInit {
   private readonly authService = inject(MrAuthService);
+  private readonly activeTabService = inject(MrActiveTabService);
 
-  activeTab: string = 'home';
-  setActiveTab(tab: string) {
-    this.activeTab = tab;
-  }
-  isActiveTab(tab: string): boolean {
-    return this.activeTab === tab;
-  }
+  activeTab = signal(this.activeTabService.activeTab());
 
   showLogin = signal<boolean>(true);
   hideLogin = signal<boolean>(false);
+
+  isActiveTab(tab: string): boolean {
+    return this.activeTabService.isActiveTab(tab);
+  }
 
   isClinicsActive = signal<boolean>(this.authService.isClinicsActive());
   isMyAccountActive = signal<boolean>(this.authService.isMyAccountActive());
@@ -30,10 +30,13 @@ export class MrNavbar implements OnInit {
   isResearchActive = signal<boolean>(this.authService.isResearchActive());
   isNewPatientActive = signal<boolean>(this.authService.isNewPatientActive());
   isPatientInfoActive = signal<boolean>(this.authService.isPatientInfoActive());
+  isRolesActive = signal<boolean>(this.authService.isRolesActive());
 
   ngOnInit() {
     this.showLogin = this.authService.showLogin;
     this.hideLogin = this.authService.hideLogin;
+    this.activeTab = this.activeTabService.activeTab;
+
     this.isClinicsActive = this.authService.isClinicsActive;
     this.isMyAccountActive = this.authService.isMyAccountActive;
     this.isMedicinesActive = this.authService.isMedicinesActive;
@@ -41,5 +44,6 @@ export class MrNavbar implements OnInit {
     this.isResearchActive = this.authService.isResearchActive;
     this.isNewPatientActive = this.authService.isNewPatientActive;
     this.isPatientInfoActive = this.authService.isPatientInfoActive;
+    this.isRolesActive = this.authService.isRolesActive;
   }
 }

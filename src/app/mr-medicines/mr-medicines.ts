@@ -4,6 +4,7 @@ import {
   ViewChild,
   inject,
   OnInit,
+  signal,
 } from '@angular/core';
 import { MrSearch } from '../mr-search/mr-search';
 import { MatTableModule } from '@angular/material/table';
@@ -21,6 +22,8 @@ import { DatePipe } from '@angular/common';
 import { MrDeleteMedicine } from '../mr-delete-medicine/mr-delete-medicine';
 import { MrMedicineStateEnum } from '../enums/mr-medicine-state-enum';
 import { MrMedicineStatePipe } from '../pipes/mr-medicine-state-pipe';
+import { MrActiveTabService } from '../services/mr-active-tab-service';
+import { MrAuthService } from '../services/mr-auth-service';
 
 @Component({
   selector: 'app-mr-medicines',
@@ -38,6 +41,8 @@ import { MrMedicineStatePipe } from '../pipes/mr-medicine-state-pipe';
 })
 export class MrMedicines implements AfterViewInit, OnInit {
   private readonly medicineService = inject(MrMedicineService);
+  private readonly authService = inject(MrAuthService);
+  private readonly activeTabService = inject(MrActiveTabService);
   private _liveAnnouncer = inject(LiveAnnouncer);
 
   dataSource = new MatTableDataSource<MrMedicineInterface>([]);
@@ -59,8 +64,9 @@ export class MrMedicines implements AfterViewInit, OnInit {
   @ViewChild(MatSort)
   sort: MatSort = new MatSort();
 
+  isAddActive = signal<boolean>(false);
+
   search(text: string) {
-    console.log('Search text:', text);
     this.medicineService.getMedicines(text).subscribe({
       next: (data) => {
         this.dataSource.data = data as MrMedicineInterface[];
@@ -89,6 +95,13 @@ export class MrMedicines implements AfterViewInit, OnInit {
     this.dataSource.sort = this.sort;
   }
   ngOnInit() {
+    this.activeTabService.setActiveTab('medicine');
+
+    this.isAddActive.set(
+      this.authService.isRoleActive('Admin') ||
+        this.authService.isRoleActive('Manager')
+    );
+
     this.medicineService.getAllMedicines().subscribe((medicines) => {
       this.dataSource.data = medicines;
       this.dataSource.sortingDataAccessor = this.sortingDataAccessor;

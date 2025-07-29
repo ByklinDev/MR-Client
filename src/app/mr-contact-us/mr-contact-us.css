@@ -20,13 +20,13 @@
   margin-bottom: 20px;
   font-size: 24px;
   font-weight: bold;
-  color: #326A8C;
+  color: #326a8c;
 }
 .btnfullwidth {
   width: 100%;
   height: 50px;
   margin-top: 20px;
-  background-color: #326A8C;
+  background-color: #326a8c;
   color: white;
   border-radius: 0.25rem;
   border: none;
@@ -37,7 +37,7 @@
   cursor: pointer;
 }
 .btnfullwidth:active {
-  background-color: #326A8C;
+  background-color: #326a8c;
   cursor: pointer;
   -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
   -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
@@ -63,4 +63,10 @@
 }
 #email {
   width: 50%;
+}
+
+.errortext {
+  color: #ea5959;
+  padding-top: 15px;
+  text-align: center;
 }

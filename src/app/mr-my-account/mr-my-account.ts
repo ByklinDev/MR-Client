@@ -11,8 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MrAuthService } from '../services/mr-auth-service';
 import { MrUserService } from '../services/mr-user-service';
-import { response } from 'express';
 import { Router } from '@angular/router';
+import { MrActiveTabService } from '../services/mr-active-tab-service';
 
 @Component({
   selector: 'app-mr-my-account',
@@ -29,6 +29,7 @@ import { Router } from '@angular/router';
 export class MrMyAccount implements OnInit {
   private readonly authService = inject(MrAuthService);
   private readonly userService = inject(MrUserService);
+  private readonly activeTabService = inject(MrActiveTabService);
   private readonly router = inject(Router);
 
   userPhotoSrc = signal<string>('user_icon.png');
@@ -45,6 +46,8 @@ export class MrMyAccount implements OnInit {
   userSurname = signal<string>('');
   userId = signal<number>(0);
 
+  errorMessage = signal('');
+  
   userBarName = computed(() => this.userFirstName() + ' ' + this.userSurname());
 
   removeAccount() {
@@ -86,6 +89,9 @@ export class MrMyAccount implements OnInit {
           this.authService.userInitials.set(response.initials);
           this.router.navigate(['/']);
         },
+        error: (err) => {
+          this.errorMessage.set(err.message);
+        }
       });
     }
   }
@@ -98,7 +104,8 @@ export class MrMyAccount implements OnInit {
   }
 
   ngOnInit() {
-    // Initialize form with default values or any other setup
+    this.activeTabService.setActiveTab('myaccount');
+    this.errorMessage.set('');
     this.myAccountForm.patchValue({
       firstname: this.authService.userFirst(),
       lastname: this.authService.userLast(),

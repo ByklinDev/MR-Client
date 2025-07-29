@@ -12,14 +12,12 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
-  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MrDialogDataInterface } from '../mr-dialog-data-interface';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { MrMedicineTypeService } from '../services/mr-medicine-type-service';
 import { MrMedicineSprInterface } from '../interfaces/mr-medicine-spr-interface';

@@ -15,9 +15,9 @@ This is the frontend application for the Medical Research platform, built with A
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
-- Node.js (v16 or later recommended)
-- npm (v8 or later) or yarn
-- Angular CLI (v15 or later)
+- Node.js (v22 or later recommended)
+- npm (v11 or later) or yarn
+- Angular CLI (v20 or later)
 - Backend API server running (see [backend repository](https://github.com/ByklinDev/medical-research.git))
 
 ## Installation
@@ -72,34 +72,13 @@ For a production build:
 ng build --configuration production
 ```
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-```bash
-ng e2e
-```
-
 ## Project Structure
 
 ```
 src/
 ├── app/                     # Main application components
-│   ├── core/                # Core modules (auth, interceptors, etc.)
-│   ├── modules/             # Feature modules
-│   ├── shared/              # Shared components and services
-│   └── app.component.*      # Root component
-├── assets/                  # Static assets
 ├── environments/            # Environment configurations
-└── styles/                  # Global styles
+
 ```
 
 ## Contributing
